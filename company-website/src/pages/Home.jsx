@@ -1,273 +1,236 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import './Home.css';
+import { Zap, Brain, Cloud, Lock, Smartphone, Link as LinkIcon, BarChart3, Bot, Globe } from 'lucide-react';
+import { useScrollReveal, useGSAPReveal } from '../hooks/useAnimations';
+import EncryptedText from '../components/ui/EncryptedText';
+import CometCard from '../components/ui/CometCard';
 
-const Home = () => {
-  const heroRef = useRef(null);
-  const featuresRef = useRef(null);
-  const statsRef = useRef(null);
-  const ctaRef = useRef(null);
+const SERVICES = [
+  { Icon: Zap, title: 'Custom Software', desc: 'Bespoke applications engineered for your unique business challenges, built to scale from day one.' },
+  { Icon: Brain, title: 'AI & Machine Learning', desc: 'Intelligent systems that learn, adapt, and make data-driven decisions — transforming your operations.' },
+  { Icon: Cloud, title: 'Cloud Architecture', desc: 'Scalable, resilient cloud infrastructure designed for 99.99% uptime and global performance.' },
+  { Icon: Lock, title: 'Cybersecurity', desc: 'Enterprise-grade security solutions protecting your data, users, and business continuity.' },
+  { Icon: Smartphone, title: 'Mobile & Web', desc: 'Beautiful, performant applications across every platform — web, iOS, and Android.' },
+  { Icon: LinkIcon, title: 'API & Integrations', desc: 'Seamless connectivity between your tools, platforms, and third-party services.' },
+];
 
-  const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
-  const featuresInView = useInView(featuresRef, { once: true, margin: "-100px" });
-  const statsInView = useInView(statsRef, { once: true, margin: "-100px" });
-  const ctaInView = useInView(ctaRef, { once: true, margin: "-100px" });
+const TESTIMONIALS = [
+  {
+    text: "Hemmingway Technologies transformed our legacy system into a modern, AI-powered platform. Delivery was ahead of schedule and the quality was exceptional.",
+    name: 'Sarah Chen', role: 'CTO, Nexus Corp', initial: 'S',
+  },
+  {
+    text: "Their cloud architecture reduced our infrastructure costs by 60% while improving performance threefold. Truly remarkable engineering.",
+    name: 'Marcus Reid', role: 'VP Engineering, Orbit Labs', initial: 'M',
+  },
+  {
+    text: "The mobile app they built for us hit 50k downloads in the first month. The attention to detail in the UX was outstanding.",
+    name: 'Priya Nair', role: 'Product Lead, Vela Health', initial: 'P',
+  },
+];
 
-  // Magnetic Button Effect Hook
-  const MagneticButton = ({ children, className, to }) => {
-    const ref = useRef(null);
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
+const MARQUEE_ITEMS = [
+  { Icon: Zap, text: 'Custom Software' },
+  { Icon: Brain, text: 'Artificial Intelligence' },
+  { Icon: Cloud, text: 'Cloud Solutions' },
+  { Icon: Lock, text: 'Cybersecurity' },
+  { Icon: Smartphone, text: 'Mobile Apps' },
+  { Icon: LinkIcon, text: 'API Integration' },
+  { Icon: BarChart3, text: 'Data Analytics' },
+  { Icon: Bot, text: 'Process Automation' },
+  { Icon: Globe, text: 'Web Platforms' },
+];
 
-    const springConfig = { damping: 15, stiffness: 150 };
-    const xSpring = useSpring(x, springConfig);
-    const ySpring = useSpring(y, springConfig);
-
-    const handleMouseMove = (e) => {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      x.set((e.clientX - centerX) * 0.3);
-      y.set((e.clientY - centerY) * 0.3);
-    };
-
-    const handleMouseLeave = () => {
-      x.set(0);
-      y.set(0);
-    };
-
-    return (
-      <motion.div
-        ref={ref}
-        style={{ x: xSpring, y: ySpring }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <Link to={to} className={className}>
-          {children}
-        </Link>
-      </motion.div>
-    );
-  };
-
-  // Animation Variants
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 60 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1]
-      }
-    }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const floatingCard = {
-    hidden: { opacity: 0, scale: 0.8, y: 50 },
-    visible: (i) => ({
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.2,
-        duration: 0.7,
-        ease: [0.22, 1, 0.36, 1]
-      }
-    })
-  };
-
-  const features = [
-    {
-      icon: '⚡',
-      title: 'Execution Under Pressure',
-      desc: 'Proven ability to design, iterate, and deliver systems in high-stakes environments where requirements evolve continuously.'
-    },
-    {
-      icon: '🧠',
-      title: 'Engineering-First Thinking',
-      desc: 'Systems are built from first principles - prioritizing reliability, scalability, and real-world usability.'
-    },
-    {
-      icon: '🛡️',
-      title: 'Operational Reliability',
-      desc: 'Focused on environments where system failure, downtime, or ambiguity is not acceptable.'
-    },
-    {
-      icon: '🏗️',
-      title: 'Full-Stack System Design',
-      desc: 'Complete system development - from backend architecture to user-facing interfaces - designed for deployment at scale.'
-    }
-  ];
-
-  const stats = [
-    { number: 'SIH 2025', label: 'Grand Finale Winners' },
-    { number: '6', label: 'Founding Engineers' },
-    { number: '1', label: 'Active Government Project' },
-    { number: '0', label: 'Tolerance for System Failure' }
-  ];
-
+export default function Home() {
+  useScrollReveal();
+  const servicesRef = useRef(null);
+  const bentoRef = useRef(null);
+  useGSAPReveal(servicesRef);
+  useGSAPReveal(bentoRef);
 
   return (
-    <div className="home">
-      {/* Hero Section */}
-      <section className="hero" ref={heroRef}>
-        <div className="container">
-          <div className="hero-content">
-            <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            >
-              Engineering Systems Where Failure Is Not an Option
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 40 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            >
-              Hemmingway Technologies is a Ministry of Coal-backed engineering firm focused on mission-critical industrial systems.
-
-              We operate at the intersection of rapid technical execution and real-world reliability - delivering solutions for environments where performance, safety, and accountability are essential.
-            </motion.p>
-            <motion.div
-              className="hero-buttons"
-              initial={{ opacity: 0, y: 40 }}
-              animate={heroInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <MagneticButton className="btn btn-primary" to="/solutions">
-                View Current Work
-              </MagneticButton>
-              <MagneticButton className="btn btn-secondary" to="/contact">
-                Start a Conversation
-              </MagneticButton>
-            </motion.div>
+    <>
+      {/* ── HERO ── */}
+      <section className="hero">
+        <div className="hero-bg" />
+        <div className="hero-overlay" />
+        <div className="hero-glow" />
+        <div className="hero-content container">
+          <div className="hero-badge">
+            <span />
+            Now Available — Enterprise Plans
           </div>
-
-          <div className="hero-graphic">
-            {[
-              { icon: '🏆', title: 'SIH Champion', delay: 0 },
-              { icon: '🏛️', title: 'Government-Backed', delay: 0.2 },
-              { icon: '💻', title: 'Full-Stack Dev', delay: 0.4 }
-            ].map((card, i) => (
-              <motion.div
-                key={i}
-                className={`floating-card card-${i + 1}`}
-                custom={i}
-                initial="hidden"
-                animate={heroInView ? "visible" : "hidden"}
-                variants={floatingCard}
-                whileHover={{ y: -10, scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                <div className="card-icon">{card.icon}</div>
-                <h4>{card.title}</h4>
-              </motion.div>
-            ))}
+          <h1>
+            Software That<br />
+            <span className="gradient-text">Moves the World</span>
+          </h1>
+          <p className="hero-sub">
+            <EncryptedText
+              text="We build transformative digital products — from AI platforms to cloud-native infrastructure — for companies that refuse to stand still."
+              speed={20}
+            />
+          </p>
+          <div className="hero-cta">
+            <Link to="/contact" className="btn-primary">
+              Start a Project
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </Link>
+            <Link to="/about" className="btn-ghost">Our Story</Link>
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="features" ref={featuresRef}>
-        <div className="container">
-          <motion.div
-            className="section-title"
-            initial={{ opacity: 0, y: 40 }}
-            animate={featuresInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <h2>The Hemmingway Advantage</h2>
-            <p>Built for environments where execution matters.</p>
-          </motion.div>
+      {/* ── MARQUEE ── */}
+      <div className="marquee-section">
+        <div className="marquee-track">
+          {[0, 1].map((i) => (
+            <div key={i} className="marquee-inner">
+              {MARQUEE_ITEMS.map((item, j) => {
+                const IconComponent = item.Icon;
+                return (
+                  <div key={j} className="marquee-item">
+                    <IconComponent size={18} style={{ display: 'inline-block', marginRight: '8px' }} />
+                    {item.text}
+                    {j < MARQUEE_ITEMS.length - 1 && <span style={{ margin: '0 12px', opacity: 0.2 }}>·</span>}
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
 
-          <motion.div
-            className="features-grid"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={featuresInView ? "visible" : "hidden"}
-          >
-            {features.map((feature, i) => (
-              <motion.div
-                key={i}
-                className="feature-card card"
-                variants={fadeInUp}
-                whileHover={{ y: -8 }}
-                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              >
-                <div className="feature-icon">{feature.icon}</div>
-                <h3>{feature.title}</h3>
-                <p>{feature.desc}</p>
-              </motion.div>
+      {/* ── SERVICES ── */}
+      <section className="services" id="services" ref={servicesRef}>
+        <div className="container">
+          <div className="section-header fade-up">
+            <div className="tag">What We Do</div>
+            <h2>End-to-end software<br />engineering excellence</h2>
+            <p>From concept to deployment, we handle every layer of your digital stack with precision and craft.</p>
+          </div>
+          <div className="services-grid" style={{ marginTop: '64px' }}>
+            {SERVICES.map((s, i) => {
+              const IconComponent = s.Icon;
+              return (
+                <div key={i} className="service-card" data-reveal style={{ transitionDelay: `${i * 0.1}s` }}>
+                  <div className="service-icon"><IconComponent size={32} /></div>
+                  <h3>{s.title}</h3>
+                  <p>{s.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── BENTO ── */}
+      <section className="bento" ref={bentoRef}>
+        <div className="container">
+          <div className="section-header fade-up">
+            <div className="tag">Why Hemmingway</div>
+            <h2>Built for scale,<br />crafted for humans</h2>
+          </div>
+          <div className="bento-grid">
+            <CometCard className="bento-card bento-1" >
+              <div data-reveal>
+                <div className="bento-badge">Performance</div>
+                <h3>10x faster delivery without compromising quality</h3>
+                <p>Our agile-first methodology and battle-tested frameworks let us ship production-ready code in record time.</p>
+                <div className="bento-visual-chart">
+                  {[40, 65, 55, 80, 70, 90, 85, 100].map((h, i) => (
+                    <div key={i} className="chart-bar" style={{ height: `${h}%`, animationDelay: `${i * 0.1}s` }} />
+                  ))}
+                </div>
+              </div>
+            </CometCard>
+
+            <CometCard className="bento-card bento-2">
+              <div data-reveal>
+                <div className="bento-badge">Security</div>
+                <h3>Zero-compromise security baked in from line one</h3>
+                <p>SOC 2 compliant. GDPR ready. Every system we build meets enterprise security standards by default.</p>
+                <div className="bento-orbit">
+                  <div className="orbit-ring"><div className="orbit-dot" /></div>
+                  <div className="orbit-center">🔐</div>
+                </div>
+              </div>
+            </CometCard>
+
+            <CometCard className="bento-card bento-3">
+              <div data-reveal>
+                <div className="bento-badge">AI-First</div>
+                <h3>Intelligent by default</h3>
+                <p>Every product we build can integrate machine learning — from recommendation engines to predictive analytics.</p>
+                <div style={{ marginTop: '24px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+                  {['GPT-4o', 'Gemini', 'Claude', 'LLaMA', 'Custom Models'].map((t) => (
+                    <span key={t} style={{ background: 'var(--primary-light)', color: 'var(--primary)', borderRadius: '6px', padding: '4px 10px', fontSize: '12px', fontWeight: 600 }}>{t}</span>
+                  ))}
+                </div>
+              </div>
+            </CometCard>
+
+            <CometCard className="bento-card bento-4">
+              <div data-reveal>
+                <div className="bento-badge">Partnership</div>
+                <h3>We're not a vendor — we're your engineering partner</h3>
+                <p>Dedicated teams, transparent communication, and a shared stake in your success. We celebrate when you win.</p>
+                <div style={{ display: 'flex', gap: '20px', marginTop: '28px', flexWrap: 'wrap' }}>
+                  {[['150+', 'Projects'], ['98%', 'Retention'], ['24/7', 'Support']].map(([n, l]) => (
+                    <div key={l}>
+                      <div style={{ fontSize: '32px', fontWeight: 800, background: 'linear-gradient(135deg, #fff, var(--primary))', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>{n}</div>
+                      <div style={{ fontSize: '13px', color: 'var(--text-muted)', marginTop: '4px' }}>{l}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </CometCard>
+          </div>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS ── */}
+      <section className="testimonials">
+        <div className="container">
+          <div className="section-header centered fade-up">
+            <div className="tag">Client Stories</div>
+            <h2>Trusted by teams<br />around the world</h2>
+            <p>Don't take our word for it — here's what our clients say.</p>
+          </div>
+          <div className="testimonials-grid">
+            {TESTIMONIALS.map((t, i) => (
+              <div key={i} className="testimonial-card fade-up" style={{ transitionDelay: `${i * 0.15}s` }}>
+                <div className="stars">★★★★★</div>
+                <p className="testimonial-text">"{t.text}"</p>
+                <div className="testimonial-author">
+                  <div className="testimonial-avatar">{t.initial}</div>
+                  <div>
+                    <div className="testimonial-name">{t.name}</div>
+                    <div className="testimonial-role">{t.role}</div>
+                  </div>
+                </div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="stats-section" ref={statsRef}>
+      {/* ── CTA ── */}
+      <section className="cta-section">
         <div className="container">
-          <motion.div
-            className="stats"
-            variants={staggerContainer}
-            initial="hidden"
-            animate={statsInView ? "visible" : "hidden"}
-          >
-            {stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                className="stat-card"
-                variants={fadeInUp}
-                whileHover={{ scale: 1.08, y: -5 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-              >
-                <div className="stat-number">{stat.number}</div>
-                <div className="stat-label">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
+          <div className="cta-inner fade-up">
+            <div className="tag" style={{ margin: '0 auto 24px' }}>Ready to Build?</div>
+            <h2>Let's build something<br /><span className="gradient-text">extraordinary together</span></h2>
+            <p>Whether you have a full spec or just an idea on a napkin — we'd love to hear from you.</p>
+            <div className="cta-buttons">
+              <Link to="/contact" className="btn-primary">
+                Start Your Project
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </Link>
+              <Link to="/about" className="btn-ghost">Meet the Team</Link>
+            </div>
+          </div>
         </div>
       </section>
-
-      {/* CTA Section */}
-      <section className="cta-section" ref={ctaRef}>
-        <div className="container">
-          <motion.div
-            className="cta-content"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={ctaInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <h2>Where Innovation Meets Industry</h2>
-            <p>
-              We focus on developing software for real-world industrial environments - where reliability, clarity, and accountability are critical.
-
-              If you are working on systems where performance is not optional, we are open to collaboration.
-            </p>
-            <MagneticButton className="btn btn-primary" to="/contact">
-              Start a Conversation
-            </MagneticButton>
-          </motion.div>
-        </div>
-      </section>
-    </div>
+    </>
   );
-};
-
-export default Home;
+}
