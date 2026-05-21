@@ -18,18 +18,19 @@ const TEAM_MEMBERS = [
     expertise: ['AI/ML', 'Cloud', 'DevOps']
   },
   {
+    
+    name: 'Manish Mandia',
+    role: 'Chief Product Officer',
+    bio: 'Full-stack wizard. Mentor to 12+ junior engineers and obsessive about code quality.',
+    Icon: Cog,
+    expertise: ['Full Stack', 'UI/UX', 'Performance']
+  },
+  {
     name: 'Yash Kumar',
     role: 'Chief Finance Officer',
     bio: 'Award-winning designer who believes code and design are inseparable.',
     Icon: Palette,
     expertise: ['UI/UX', 'Design Systems', 'Branding']
-  },
-  {
-    name: 'Manish Mandia',
-    role: 'Chief Product Officer',
-    bio: 'Full-stack wizard. Mentor to 12+ junior engineers and obsessive about code quality.',
-    Icon: Cog,
-    expertise: ['Full Stack', 'Mentorship', 'Performance']
   },
   {
     name: 'Sakshi Yadav',
@@ -54,24 +55,14 @@ export default function Team() {
 
   return (
     <>
-      {/* ── PAGE HERO ── */}
-      <section className="page-hero">
-        <div className="page-hero-glow" />
-        <div className="container">
-          <div className="tag">Our Team</div>
-          <h1>
-            Meet the<br />
-            <span className="gradient-text">people behind the magic</span>
-          </h1>
-          <p>
-            A diverse group of engineers, designers, and leaders united by a passion for excellence. We hire for talent and culture fit — people who care deeply about shipping great software.
-          </p>
-        </div>
-      </section>
-
       {/* ── TEAM GRID ── */}
       <section className="team-section">
         <div className="container">
+          <div className="tag">Our Team</div>
+          <h1>
+            Meet the
+            <span className="gradient-text"> people behind the magic</span>
+          </h1>
           <div ref={gridRef} className="team-grid">
             {TEAM_MEMBERS.map((member, i) => {
               const IconComponent = member.Icon;

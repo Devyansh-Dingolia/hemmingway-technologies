@@ -954,11 +954,11 @@
   position: relative;
   z-index: 0;
   text-align: left;
-  padding: 0 40px 0;
+  padding: 0 40px 33px;
   font-size: clamp(80px, 18vw, 200px);
   font-weight: 900;
   font-family: 'Space Grotesk', sans-serif;
-  color: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.062);
   letter-spacing: -6px;
   line-height: 0.9;
   user-select: none;

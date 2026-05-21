@@ -83,6 +83,7 @@ export default function Footer() {
 
       {/* ── GIANT WATERMARK ── */}
       <div className="ftr-watermark" aria-hidden="true">Hemmingway</div>
+      
     </footer>
   );
 }
