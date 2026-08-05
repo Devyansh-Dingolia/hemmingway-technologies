@@ -4,6 +4,37 @@
     }
 }
 
+/* ── Contact page – tablet & below ───────────────────────────────────────── */
+@media (max-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr !important;
+        gap: 48px !important;
+        margin-top: 48px !important;
+    }
+}
+
+/* ── Contact page – mobile ────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .contact-form {
+        padding: 28px 20px !important;
+        border-radius: 16px !important;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr !important;
+        gap: 0 !important;
+    }
+
+    .select-listbox {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Give the contact section a bit of breathing room */
+    section[style*="padding: 0 0 120px"] {
+        padding-bottom: 60px !important;
+    }
+}
+
 @media (max-width: 480px) {
     .select-listbox {
         grid-template-columns: 1fr;
