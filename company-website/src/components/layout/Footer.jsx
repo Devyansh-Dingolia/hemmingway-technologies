@@ -14,7 +14,7 @@ const COLS = [
   {
     title: 'Socials',
     links: [
-      { label: 'LinkedIn', href: 'https://linkedin.com' },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/company/hemmingway-technologies' },
       { label: 'Twitter', href: 'https://twitter.com' },
       { label: 'GitHub', href: 'https://github.com' },
       { label: 'Instagram', href: 'https://instagram.com' },
@@ -83,7 +83,7 @@ export default function Footer() {
 
       {/* ── GIANT WATERMARK ── */}
       <div className="ftr-watermark" aria-hidden="true">Hemmingway</div>
-      
+
     </footer>
   );
 }

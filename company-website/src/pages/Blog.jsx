@@ -156,7 +156,7 @@ export default function Blog() {
                 disabled={subscribeStatus === 'loading'}
                 required
               />
-              <button type="submit" className="btn btn-primary" disabled={subscribeStatus === 'loading'}>
+              <button type="submit" className="btn btn-primary" disabled={subscribeStatus === 'loading'} style={{ justifyContent: 'center' }}>
                 {subscribeStatus === 'loading'
                   ? <Loader2 size={16} style={{ animation: 'spin 0.9s linear infinite' }} />
                   : 'Subscribe'}

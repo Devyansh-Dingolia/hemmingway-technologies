@@ -13,22 +13,22 @@ const API_URL = import.meta.env.VITE_API_URL
 
 // ── Service labels ─────────────────────────────────────────────────────────────
 const SERVICES = [
-  { value: 'custom',   label: 'Custom Software Development' },
-  { value: 'ai',       label: 'AI & Machine Learning' },
-  { value: 'cloud',    label: 'Cloud Architecture' },
+  { value: 'custom', label: 'Custom Software Development' },
+  { value: 'ai', label: 'AI & Machine Learning' },
+  { value: 'cloud', label: 'Cloud Architecture' },
   { value: 'security', label: 'Cybersecurity' },
-  { value: 'mobile',   label: 'Mobile & Web Apps' },
-  { value: 'api',      label: 'API & Integrations' },
-  { value: 'other',    label: 'Other / Not Sure Yet' },
+  { value: 'mobile', label: 'Mobile & Web Apps' },
+  { value: 'api', label: 'API & Integrations' },
+  { value: 'other', label: 'Other / Not Sure Yet' },
 ];
 
 // ── Client-side validation ─────────────────────────────────────────────────────
 function validate(form) {
   const errs = {};
-  if (!form.name.trim())    errs.name    = 'Full name is required.';
-  if (!form.email.trim())   errs.email   = 'Email address is required.';
+  if (!form.name.trim()) errs.name = 'Full name is required.';
+  if (!form.email.trim()) errs.email = 'Email address is required.';
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-                            errs.email   = 'Please enter a valid email address.';
+    errs.email = 'Please enter a valid email address.';
   if (!form.message.trim()) errs.message = 'Please describe your project.';
   return errs;
 }
@@ -144,10 +144,10 @@ export default function Contact() {
   const [form, setForm] = useState({
     name: '', email: '', company: '', service: '', message: '',
   });
-  const [errors,    setErrors]    = useState({});
-  const [status,    setStatus]    = useState('idle'); // idle | loading | success | error
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [serverMsg, setServerMsg] = useState('');
-  const [toast,     setToast]     = useState(null);  // { message, type } | null
+  const [toast, setToast] = useState(null);  // { message, type } | null
 
   const textareaRef = useRef(null);
 
@@ -187,9 +187,9 @@ export default function Contact() {
     try {
       // 2. POST to the mailer backend
       const res = await fetch(API_URL, {
-        method:  'POST',
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(form),
+        body: JSON.stringify(form),
       });
 
       // Guard: if the server returned an empty / non-JSON body (e.g. backend
@@ -279,9 +279,9 @@ export default function Contact() {
               <div style={{ marginTop: '48px' }}>
                 {[
                   { icon: '📍', label: 'Headquarters', value: 'RZ F1/380, Mahavir Enclave, New Delhi' },
-                  { icon: '✉️', label: 'Email',         value: 'hemmingway.tech@gmail.com' },
-                  { icon: '📞', label: 'Phone',         value: '+91 7011012021' },
-                  { icon: '🕐', label: 'Hours',         value: 'Mon–Fri, 9am–6pm IST' },
+                  { icon: '✉️', label: 'Email', value: 'hemmingway.tech@gmail.com' },
+                  { icon: '📞', label: 'Phone', value: '+91 7011012021' },
+                  { icon: '🕐', label: 'Hours', value: 'Mon–Fri, 9am–6pm IST' },
                 ].map((item, i) => (
                   <div
                     key={i}
@@ -307,13 +307,13 @@ export default function Contact() {
                 </div>
                 <div style={{ display: 'flex', gap: '12px' }}>
                   {[
-                    { icon: '𝕏',  label: 'X/Twitter' },
-                    { icon: 'in', label: 'LinkedIn' },
-                    { icon: '⌨️', label: 'GitHub' },
+                    { icon: '𝕏', label: 'X/Twitter', href: '#' },
+                    { icon: 'in', label: 'LinkedIn', href: 'https://www.linkedin.com/company/hemmingway-technologies' },
+                    { icon: '⌨️', label: 'GitHub', href: '#' },
                   ].map((s) => (
                     <a
                       key={s.label}
-                      href="#"
+                      href={s.href}
                       aria-label={s.label}
                       style={{
                         width: '44px', height: '44px', borderRadius: '12px',

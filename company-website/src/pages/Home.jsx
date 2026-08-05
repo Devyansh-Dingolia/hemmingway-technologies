@@ -38,7 +38,7 @@ export default function Home() {
   return (
     <>
       <Helmet>
-        <title>Hemmingway Technologies | AI-Powered Software Safety Solutions</title>
+        <title>Hemmingway Technologies</title>
 
         <meta
           name="description"
@@ -170,14 +170,14 @@ export default function Home() {
                 <div className="bento-badge">Partnership</div>
                 <h3>We're not a vendor — we're your engineering partner</h3>
                 <p>Dedicated teams, transparent communication, and a shared stake in your success. We celebrate when you win.</p>
-                
+
               </div>
             </CometCard>
           </div>
         </div>
       </section>
 
-      
+
 
       {/* ── CTA ── */}
       <section className="cta-section">
@@ -193,7 +193,7 @@ export default function Home() {
             color={'#6367F1'}
             autoAnimate={true}
             particleVariance={1}
-            fieldStrength ={1}
+            fieldStrength={1}
           />
         </div>
         <div className="container">
