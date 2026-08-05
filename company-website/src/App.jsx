@@ -11,6 +11,11 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
+import Solutions from './pages/Solutions';
+import Launchpad from './pages/Launchpad';
+import AISuite from './pages/AISuite';
+import CloudOps from './pages/CloudOps';
+import SecureStack from './pages/SecureStack';
 import Contact from './pages/Contact';
 import Team from './pages/Team';
 import Blog from './pages/Blog';
@@ -40,6 +45,11 @@ function AppContent({ theme, toggleTheme }) {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/launchpad" element={<Launchpad />} />
+          <Route path="/ai-suite" element={<AISuite />} />
+          <Route path="/cloudops" element={<CloudOps />} />
+          <Route path="/securestack" element={<SecureStack />} />
           <Route path="/team" element={<Team />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />

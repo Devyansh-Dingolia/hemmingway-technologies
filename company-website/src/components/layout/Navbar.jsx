@@ -22,15 +22,9 @@ function HoveredLink({ href, to, children }) {
   return <a href={href} style={style} onMouseEnter={onEnter} onMouseLeave={onLeave}>{children}</a>;
 }
 
-function ProductItem({ title, description, href, Icon }) {
-  return (
-    <a
-      href={href}
-      className="product-item"
-      style={{ textDecoration: 'none', display: 'flex', gap: '12px', alignItems: 'flex-start', padding: '8px', borderRadius: '10px', transition: 'background 0.2s' }}
-      onMouseEnter={e => (e.currentTarget.style.background = 'var(--primary-light)')}
-      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-    >
+function ProductItem({ title, description, href, to, Icon }) {
+  const content = (
+    <>
       <div style={{ width: 40, height: 40, borderRadius: '10px', background: 'var(--primary-light)', border: '1px solid rgba(99,103,241,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, flexShrink: 0 }}>
         <Icon size={24} />
       </div>
@@ -38,6 +32,24 @@ function ProductItem({ title, description, href, Icon }) {
         <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-bright)', marginBottom: 3 }}>{title}</div>
         <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.4 }}>{description}</div>
       </div>
+    </>
+  );
+
+  const style = { textDecoration: 'none', display: 'flex', gap: '12px', alignItems: 'flex-start', padding: '8px', borderRadius: '10px', transition: 'background 0.2s' };
+  const onMouseEnter = e => (e.currentTarget.style.background = 'var(--primary-light)');
+  const onMouseLeave = e => (e.currentTarget.style.background = 'transparent');
+
+  if (to) {
+    return (
+      <Link to={to} className="product-item" style={style} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={href} className="product-item" style={style} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      {content}
     </a>
   );
 }
@@ -158,10 +170,10 @@ export default function Navbar({ theme, toggleTheme }) {
 
             <MenuItem label="Solutions" active={activeMenu} setActive={setActiveMenu}>
               <div className="dropdown-products">
-                <ProductItem Icon={Rocket} title="Launchpad" description="From idea to production-ready MVP in 6 weeks." href="#" />
-                <ProductItem Icon={Brain} title="AI Suite" description="Custom LLM integrations & intelligent automation." href="#" />
-                <ProductItem Icon={Cloud} title="CloudOps" description="Managed cloud infrastructure at enterprise scale." href="#" />
-                <ProductItem Icon={Lock} title="SecureStack" description="Full-stack security audit & hardening service." href="#" />
+                <ProductItem Icon={Rocket} title="Launchpad" description="From idea to production-ready MVP in 6 weeks." to="/launchpad" />
+                <ProductItem Icon={Brain} title="AI Suite" description="Custom LLM integrations & intelligent automation." to="/ai-suite" />
+                <ProductItem Icon={Cloud} title="CloudOps" description="Managed cloud infrastructure at enterprise scale." to="/cloudops" />
+                <ProductItem Icon={Lock} title="SecureStack" description="Full-stack security audit & hardening service." to="/securestack" />
               </div>
             </MenuItem>
           </div>
@@ -206,10 +218,10 @@ export default function Navbar({ theme, toggleTheme }) {
 
             <MenuItem label="Solutions" active={activeMenu} setActive={setActiveMenu}>
               <div className="dropdown-products">
-                <ProductItem Icon={Rocket} title="Launchpad" description="From idea to production-ready MVP in 6 weeks." href="#" />
-                <ProductItem Icon={Brain} title="AI Suite" description="Custom LLM integrations & intelligent automation." href="#" />
-                <ProductItem Icon={Cloud} title="CloudOps" description="Managed cloud infrastructure at enterprise scale." href="#" />
-                <ProductItem Icon={Lock} title="SecureStack" description="Full-stack security audit & hardening service." href="#" />
+                <ProductItem Icon={Rocket} title="Launchpad" description="From idea to production-ready MVP in 6 weeks." to="/launchpad" />
+                <ProductItem Icon={Brain} title="AI Suite" description="Custom LLM integrations & intelligent automation." to="/ai-suite" />
+                <ProductItem Icon={Cloud} title="CloudOps" description="Managed cloud infrastructure at enterprise scale." to="/cloudops" />
+                <ProductItem Icon={Lock} title="SecureStack" description="Full-stack security audit & hardening service." to="/securestack" />
               </div>
             </MenuItem>
           </div>
