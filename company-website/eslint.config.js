@@ -6,8 +6,17 @@ import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
   globalIgnores(['dist']),
+  // ── Backend: Node.js CommonJS files ──────────────────────────────────────
   {
-    files: ['**/*.{js,jsx}'],
+    files: ['backend/**/*.{js,cjs}'],
+    extends: [js.configs.recommended],
+    languageOptions: {
+      globals: globals.node,
+    },
+  },
+  // ── Frontend: React/JSX browser files ────────────────────────────────────
+  {
+    files: ['src/**/*.{js,jsx}'],
     extends: [
       js.configs.recommended,
       reactHooks.configs.flat.recommended,

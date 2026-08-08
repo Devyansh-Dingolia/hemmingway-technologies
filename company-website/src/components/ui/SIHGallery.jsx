@@ -51,6 +51,7 @@ export default function SIHGallery() {
     if (lightbox) return;
     const t = setTimeout(() => next(), 4500);
     return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current, lightbox]);
 
   // Keyboard navigation
@@ -62,6 +63,7 @@ export default function SIHGallery() {
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current]);
 
   return (

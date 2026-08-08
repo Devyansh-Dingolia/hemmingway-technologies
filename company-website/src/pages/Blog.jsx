@@ -47,10 +47,10 @@ export default function Blog() {
       }
 
       if (res.ok && data.success) {
-        setToast({ type: 'success', title: 'Subscribed!', message: "You're on the list — we'll send new posts as they go up." });
+        setToast({ type: 'success', title: 'Subscribed!', message: "You're on the list — we'll send new posts as they go up.", id: Math.random() });
         setSubscribeEmail('');
       } else if (res.status === 422 && data.errors?.email) {
-        setToast({ type: 'error', title: 'Invalid Email', message: data.errors.email });
+        setToast({ type: 'error', title: 'Invalid Email', message: data.errors.email, id: Math.random() });
       } else {
         throw new Error(data.message || 'Something went wrong. Please try again.');
       }
@@ -58,7 +58,7 @@ export default function Blog() {
       const msg = err.message === 'Failed to fetch'
         ? 'Could not reach the server. Please check your connection or try again later.'
         : err.message;
-      setToast({ type: 'error', title: 'Subscription Failed', message: msg });
+      setToast({ type: 'error', title: 'Subscription Failed', message: msg, id: Math.random() });
     } finally {
       setSubscribeStatus('idle');
     }
@@ -68,7 +68,7 @@ export default function Blog() {
     <>
       {toast && (
         <Toast
-          key={Date.now()}
+          key={toast.id}
           type={toast.type}
           title={toast.title}
           message={toast.message}

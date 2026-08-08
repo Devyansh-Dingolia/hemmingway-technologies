@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 // useScrollReveal — triggers .visible class when elements enter viewport.
 // Pass a `deps` array when the page conditionally renders different

@@ -39,6 +39,12 @@ export default function Toast({ message, type = 'success', title, onClose }) {
   const [visible, setVisible] = useState(false);
   const timerRef = useRef(null);
 
+  const handleClose = () => {
+    setVisible(false);
+    // Let the slide-out animation finish before unmounting
+    setTimeout(onClose, 400);
+  };
+
   // Animate in on mount, auto-dismiss after DURATION
   useEffect(() => {
     // Tiny delay so the slide-in transition fires after first paint
@@ -53,12 +59,6 @@ export default function Toast({ message, type = 'success', title, onClose }) {
       clearTimeout(timerRef.current);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const handleClose = () => {
-    setVisible(false);
-    // Let the slide-out animation finish before unmounting
-    setTimeout(onClose, 400);
-  };
 
   return (
     <div

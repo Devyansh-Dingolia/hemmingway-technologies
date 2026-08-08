@@ -6,6 +6,8 @@ import { Rocket, Brain, Cloud, Lock, Moon, Sun } from 'lucide-react';
    Aceternity-style dropdown components
 ───────────────────────────────────────── */
 
+// HoveredLink kept for future use (currently navigation uses NavLink)
+// eslint-disable-next-line no-unused-vars
 function HoveredLink({ href, to, children }) {
   const style = {
     display: 'block',
@@ -74,7 +76,10 @@ function useEncrypt(text, active) {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   const raf = useRef(null);
   useEffect(() => {
-    if (!active) { setDisplay(text); return; }
+    if (!active) {
+      const t = setTimeout(() => setDisplay(text), 0);
+      return () => clearTimeout(t);
+    }
     let iter = 0;
     const step = () => {
       setDisplay(text.split('').map((c, i) => c === ' ' ? ' ' : i < iter ? text[i] : chars[Math.floor(Math.random() * chars.length)]).join(''));
@@ -131,7 +136,8 @@ export default function Navbar({ theme, toggleTheme }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => { setActiveMenu(null); window.scrollTo(0, 0); }, [location.pathname]);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { setActiveMenu(null); }, [location.pathname]);
 
   const isActive = p => location.pathname === p;
 

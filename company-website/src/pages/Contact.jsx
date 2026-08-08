@@ -147,7 +147,7 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
   const [serverMsg, setServerMsg] = useState('');
-  const [toast, setToast] = useState(null);  // { message, type } | null
+  const [toast, setToast] = useState(null);  // { message, type, id } | null
 
   const textareaRef = useRef(null);
 
@@ -197,9 +197,10 @@ export default function Contact() {
       let data;
       try {
         data = await res.json();
-      } catch (_parseErr) {
+      } catch (parseErr) {
         throw new Error(
-          'Could not reach the mail server. Please make sure the backend is running and try again.'
+          'Could not reach the mail server. Please make sure the backend is running and try again.',
+          { cause: parseErr }
         );
       }
 
@@ -219,7 +220,7 @@ export default function Contact() {
           : err.message;
       setStatus('error');
       setServerMsg(msg);
-      setToast({ type: 'error', message: msg });
+      setToast({ type: 'error', message: msg, id: Math.random() });
     }
   };
 
@@ -240,7 +241,7 @@ export default function Contact() {
       {/* ── Toast notification ── */}
       {toast && (
         <Toast
-          key={Date.now()}
+          key={toast.id}
           type={toast.type}
           message={toast.message}
           onClose={() => setToast(null)}
