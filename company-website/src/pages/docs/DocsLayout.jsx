@@ -1,7 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import {
-  Shield, FileText, Cookie, AlertTriangle,
-  Layers, Palette, Zap, Code2, ChevronRight,
+  Shield, FileText, Cookie, AlertTriangle, ChevronRight,
 } from 'lucide-react';
 
 const LEGAL_DOCS = [
@@ -11,12 +10,7 @@ const LEGAL_DOCS = [
   { to: '/docs/legal/disclaimer',     label: 'Disclaimer',       Icon: AlertTriangle },
 ];
 
-const FRONTEND_DOCS = [
-  { to: '/docs/frontend/overview',    label: 'Overview',         Icon: Layers },
-  { to: '/docs/frontend/design',      label: 'Design System',    Icon: Palette },
-  { to: '/docs/frontend/components',  label: 'Components',       Icon: Zap },
-  { to: '/docs/frontend/stack',       label: 'Tech Stack',       Icon: Code2 },
-];
+
 
 function NavGroup({ heading, items, pathname }) {
   return (
@@ -51,8 +45,7 @@ export default function DocsLayout({ title, updated, children }) {
           <span className="docs-sidebar-title">Documentation</span>
         </div>
 
-        <NavGroup heading="Frontend" items={FRONTEND_DOCS} pathname={pathname} />
-        <NavGroup heading="Legal"    items={LEGAL_DOCS}    pathname={pathname} />
+        <NavGroup heading="Legal" items={LEGAL_DOCS} pathname={pathname} />
 
         <div className="docs-sidebar-note">
           <p>Need help?</p>

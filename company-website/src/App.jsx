@@ -19,10 +19,7 @@ import PrivacyPolicy from './pages/docs/legal/PrivacyPolicy';
 import Terms from './pages/docs/legal/Terms';
 import CookiePolicy from './pages/docs/legal/CookiePolicy';
 import Disclaimer from './pages/docs/legal/Disclaimer';
-import DocsOverview from './pages/docs/frontend/Overview';
-import DocsDesign from './pages/docs/frontend/Design';
-import DocsComponents from './pages/docs/frontend/Components';
-import DocsStack from './pages/docs/frontend/Stack';
+
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -48,10 +45,7 @@ function AppContent({ theme, toggleTheme }) {
           <Route path="/docs/legal/terms" element={<Terms />} />
           <Route path="/docs/legal/cookie-policy" element={<CookiePolicy />} />
           <Route path="/docs/legal/disclaimer" element={<Disclaimer />} />
-          <Route path="/docs/frontend/overview" element={<DocsOverview />} />
-          <Route path="/docs/frontend/design" element={<DocsDesign />} />
-          <Route path="/docs/frontend/components" element={<DocsComponents />} />
-          <Route path="/docs/frontend/stack" element={<DocsStack />} />
+
         </Routes>
       </main>
       <Footer />
