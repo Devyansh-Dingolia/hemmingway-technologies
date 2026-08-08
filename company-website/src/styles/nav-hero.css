@@ -869,7 +869,8 @@
 /* LEFT brand */
 .ftr-brand {
   flex-shrink: 0;
-  min-width: 220px;
+  min-width: 280px;
+  max-width: 300px;
 }
 
 .ftr-brand-id {
@@ -901,6 +902,118 @@
   color: rgba(255, 255, 255, 0.6);
   line-height: 1.7;
 }
+
+.ftr-tagline {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Legal / company meta — clean, no card */
+.ftr-legal {
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ftr-legal-name {
+  font-family: var(--heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0;
+}
+
+.ftr-legal-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ftr-legal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  background: rgba(99, 103, 241, 0.07);
+  border: 1px solid rgba(99, 103, 241, 0.18);
+  border-radius: 4px;
+  padding: 3px 8px;
+  letter-spacing: 0.03em;
+}
+
+.ftr-legal-badge strong {
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 600;
+}
+
+.ftr-legal-addr {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.7;
+  margin: 0;
+}
+
+.ftr-legal-contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ftr-legal-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--sans);
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ftr-legal-contact svg {
+  opacity: 0.5;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+}
+
+.ftr-legal-contact:hover {
+  color: var(--primary);
+}
+
+.ftr-legal-contact:hover svg {
+  opacity: 1;
+}
+
+/* Bottom copyright bar */
+.ftr-bottom-bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 64px;
+  margin: 0 64px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.ftr-bottom-bar .ftr-copyright {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.015em;
+  margin: 0;
+}
+
 
 /* RIGHT columns */
 .ftr-cols {
@@ -941,6 +1054,7 @@
 .ftr-link:hover {
   color: var(--primary);
 }
+
 
 /* giant watermark */
 .ftr-watermark {
