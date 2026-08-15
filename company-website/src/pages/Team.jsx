@@ -1,17 +1,9 @@
 import { useRef } from 'react';
-import { Briefcase, Code, Palette, Cog, Monitor, Lock, Rocket, Brain, Handshake, Lightbulb } from 'lucide-react';
+import { Code, Monitor, Rocket, Brain, Handshake, Lightbulb } from 'lucide-react';
 import { useScrollReveal, useGSAPReveal } from '../hooks/useAnimations';
 import { Helmet } from 'react-helmet-async';
 
 const TEAM_MEMBERS = [
-  {
-    name: 'Devyansh Dingolia',
-    role: 'Chief Executive Officer',
-    bio: '',
-    Icon: Briefcase,
-    expertise: ['Strategy', 'Leadership', 'Architecture'],
-    linkedin: 'https://www.linkedin.com/in/devyansh-dingolia',
-  },
   {
     name: 'Janardhan Verma',
     role: 'Chief Technology Officer & Co-CEO',
@@ -21,36 +13,12 @@ const TEAM_MEMBERS = [
     linkedin: 'https://www.linkedin.com/in/janardhan-verma-3b7a89326/',
   },
   {
-    name: 'Manish Mandia',
-    role: 'Chief Product Officer',
-    bio: '',
-    Icon: Cog,
-    expertise: ['Full Stack', 'UI/UX', 'Performance'],
-    linkedin: 'https://www.linkedin.com/in/manish-mandia-367572323/',
-  },
-  {
-    name: 'Yash Kumar',
-    role: 'Chief Finance Officer',
-    bio: '',
-    Icon: Palette,
-    expertise: ['UI/UX', 'Design Systems', 'Branding'],
-    linkedin: 'https://www.linkedin.com/in/yash-kumar-7959a3325/',
-  },
-  {
     name: 'Sakshi Yadav',
     role: 'Chief Marketing Officer',
     bio: '',
     Icon: Monitor,
     expertise: ['Marketing', 'Performance', 'Animation'],
     linkedin: 'https://www.linkedin.com/in/sakshi-y-b23008324/',
-  },
-  {
-    name: 'Bhardwaj Kartikay',
-    role: 'Chief Operations Officer',
-    bio: '',
-    Icon: Lock,
-    expertise: ['Security', 'Compliance', 'Cryptography'],
-    linkedin: 'https://www.linkedin.com/in/bhardwaj-kartikay/',
   },
 ];
 

@@ -19,6 +19,7 @@ import PrivacyPolicy from './pages/docs/legal/PrivacyPolicy';
 import Terms from './pages/docs/legal/Terms';
 import CookiePolicy from './pages/docs/legal/CookiePolicy';
 import Disclaimer from './pages/docs/legal/Disclaimer';
+import CorporateInfo from './pages/CorporateInfo';
 
 
 function ScrollToTop() {
@@ -45,6 +46,7 @@ function AppContent({ theme, toggleTheme }) {
           <Route path="/docs/legal/terms" element={<Terms />} />
           <Route path="/docs/legal/cookie-policy" element={<CookiePolicy />} />
           <Route path="/docs/legal/disclaimer" element={<Disclaimer />} />
+          <Route path="/corporate-info" element={<CorporateInfo />} />
 
         </Routes>
       </main>
