@@ -2133,7 +2133,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.22;
+  opacity: 0.7;
   mix-blend-mode: screen;
 }
 
@@ -2151,7 +2151,6 @@
 .corp-hero {
   padding: 160px 0 120px;
   overflow: hidden;
-  isolation: isolate;
 }
 
 /* Dot-grid background */
@@ -2374,7 +2373,7 @@
   backdrop-filter: blur(12px);
 }
 .corp-stat-cell {
-  background: rgba(255,255,255,0.03);
+  background: var(--bg);
   padding: 32px 28px;
   text-align: center;
   transition: background 0.3s;
@@ -2658,9 +2657,16 @@
 }
 
 /* ──────────────────── Light theme ──────────────────── */
-[data-theme="light"] .corp-aurora-bg { opacity: 0.12; }
+[data-theme="light"] .corp-aurora-bg {
+  opacity: 1;
+  mix-blend-mode: multiply;
+}
 [data-theme="light"] .corp-hero-card { background: rgba(255,255,255,0.85); border-color: rgba(99,103,241,0.2); box-shadow: 0 32px 80px rgba(99,103,241,0.1); }
 [data-theme="light"] .corp-hero-card-row code { background: rgba(99,103,241,0.08); }
 [data-theme="light"] .corp-detail-row { background: rgba(255,255,255,0.6); border-color: rgba(0,0,0,0.06); }
 [data-theme="light"] .corp-detail-row--active { background: rgba(255,255,255,0.85); }
 [data-theme="light"] .corp-dir-card { background: rgba(255,255,255,0.6); }
+[data-theme="light"] .corp-stat-cell { background: var(--bg); }
+[data-theme="light"] .corp-details-section,
+[data-theme="light"] .corp-dir-section,
+[data-theme="light"] .corp-legal-section { background: transparent; }

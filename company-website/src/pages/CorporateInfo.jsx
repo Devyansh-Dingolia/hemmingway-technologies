@@ -225,10 +225,10 @@ export default function CorporateInfo() {
       {/* ════════ AURORA BACKGROUND (full page, fixed) ════════ */}
       <div className="corp-aurora-bg" aria-hidden="true">
         <Aurora
-          colorStops={['#3730a3', '#6367f1', '#a78bfa']}
-          amplitude={0.8}
-          blend={0.4}
-          speed={0.35}
+          colorStops={['#F6D3B0', '#6B6BF2', '#4BB4F9']}
+          amplitude={1.2}
+          blend={0.6}
+          speed={0.3}
         />
       </div>
 
