@@ -963,6 +963,14 @@
   margin: 0;
 }
 
+.ftr-grievance-note {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 4px;
+}
+
 .ftr-legal-contacts {
   display: flex;
   flex-direction: column;

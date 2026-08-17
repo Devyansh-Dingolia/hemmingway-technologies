@@ -71,6 +71,7 @@ export default function Footer() {
               {COMPANY_INFO.address}
             </p>
             <div className="ftr-legal-contacts">
+              <div className="ftr-grievance-note">In case of any grievance, call</div>
               <a href={`tel:${COMPANY_INFO.phone.replace(/\\s/g, '')}`} className="ftr-legal-contact">
                 <Phone size={12} />
                 {COMPANY_INFO.phone}

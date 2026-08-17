@@ -23,7 +23,7 @@ const SIH_META = [
   { icon: Hash, label: 'Team ID', value: '102387' },
 ];
 
-const FOUNDERS = ['Janardhan Verma', 'Sakshi Yadav'];
+const FOUNDERS = ['Devyansh Dingolia', 'Janardhan Verma', 'Manish Mandia', 'Yash Kumar', 'Sakshi Yadav', 'Bhardwaj Kartikay'];
 
 export default function About() {
   useScrollReveal();
@@ -50,7 +50,7 @@ export default function About() {
             <span className="gradient-text">for ambitious teams</span>
           </h1>
           <p>
-            Two founders. One hackathon win. <br /> A company born from 36 hours of relentless building.
+            Six founders. One hackathon win. <br /> A company born from 36 hours of relentless building.
           </p>
         </div>
       </section>
@@ -187,7 +187,7 @@ export default function About() {
             <div className="tag">Founders</div>
             <h2>The people behind<br /><span className="gradient-text">Hemmingway Technologies</span></h2>
           </div>
-          <div className="values-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', maxWidth: '700px', margin: '48px auto 0' }}>
+          <div className="values-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', maxWidth: '1000px', margin: '48px auto 0' }}>
             {DIRECTORS.map((director) => (
               <CometCard key={director.id} className="value-card">
                 <div data-reveal style={{ padding: '0', textAlign: 'center' }}>
@@ -201,8 +201,7 @@ export default function About() {
                     {director.initials}
                   </div>
                   <h3 style={{ marginBottom: '4px' }}>{director.name}</h3>
-                  <p style={{ margin: '0 0 4px', color: 'var(--primary)', fontWeight: 600, fontSize: '14px' }}>Founder & Director</p>
-                  <p style={{ margin: '0 0 8px', fontSize: '12px', fontFamily: 'var(--mono)', color: 'var(--text)' }}>DIN {director.din}</p>
+                  <p style={{ margin: '0 0 4px', color: 'var(--primary)', fontWeight: 600, fontSize: '14px' }}>{director.designation || 'Founder'}</p>
                   {director.linkedin && (
                     <a
                       href={director.linkedin}
