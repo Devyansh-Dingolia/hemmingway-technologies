@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { Phone, Mail, MapPin } from 'lucide-react';
+import { COMPANY_INFO } from '../../data/companyInfo';
 
 const COLS = [
   {
@@ -6,7 +8,8 @@ const COLS = [
     links: [
       { label: 'Home', to: '/' },
       { label: 'About', to: '/about' },
-      { label: 'Team', to: '/team' },
+      { label: 'Projects', to: '/projects' },
+      { label: 'Solutions', to: '/solutions' },
       { label: 'Contact', to: '/contact' },
       { label: 'Blog', to: '/blog' },
     ],
@@ -32,10 +35,10 @@ const COLS = [
   {
     title: 'Company',
     links: [
+      { label: 'Corporate Info', to: '/corporate-info' },
       { label: 'Careers', href: '#' },
       { label: 'Press Kit', href: '#' },
       { label: 'Partners', href: '#' },
-      { label: 'Support', href: '#' },
     ],
   },
 ];
@@ -49,13 +52,35 @@ export default function Footer() {
 
       {/* ── MAIN ROW ── */}
       <div className="ftr-main">
-        {/* LEFT: brand + tagline + company info */}
+        {/* LEFT: brand + tagline + statutory info */}
         <div className="ftr-brand">
           <div className="ftr-brand-id">
             <img src="/logo-icon.webp" alt="Hemmingway" className="ftr-brand-icon" />
             <span className="ftr-brand-name">Hemmingway Technologies</span>
           </div>
-          <p className="ftr-tagline">© copyright {year} HEMMINGWAY TECHNOLOGIES PRIVATE LIMITED. All rights reserved.</p>
+
+          {/* Statutory info */}
+          <div className="ftr-legal">
+            <p className="ftr-legal-name">{COMPANY_INFO.legalName}</p>
+            <div className="ftr-legal-badges">
+              <span className="ftr-legal-badge"><strong>CIN</strong> {COMPANY_INFO.cin}</span>
+              <span className="ftr-legal-badge"><strong>GST</strong> {COMPANY_INFO.gst}</span>
+            </div>
+            <p className="ftr-legal-addr">
+              <MapPin size={11} style={{ display: 'inline', verticalAlign: '-1px', marginRight: 4, opacity: 0.6 }} />
+              {COMPANY_INFO.address}
+            </p>
+            <div className="ftr-legal-contacts">
+              <a href={`tel:${COMPANY_INFO.phone.replace(/\\s/g, '')}`} className="ftr-legal-contact">
+                <Phone size={12} />
+                {COMPANY_INFO.phone}
+              </a>
+              <a href={`mailto:${COMPANY_INFO.email}`} className="ftr-legal-contact">
+                <Mail size={12} />
+                {COMPANY_INFO.email}
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* RIGHT: link columns */}
@@ -77,6 +102,11 @@ export default function Footer() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* ── BOTTOM BAR ── */}
+      <div className="ftr-bottom-bar">
+        <p className="ftr-copyright">© {year} {COMPANY_INFO.legalName}. All rights reserved.</p>
       </div>
 
       {/* ── GIANT WATERMARK ── */}

@@ -12,7 +12,9 @@ import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Team from './pages/Team';
+import Projects from './pages/Projects';
+import Solutions from './pages/Solutions';
+import { Navigate } from 'react-router-dom';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 import PrivacyPolicy from './pages/docs/legal/PrivacyPolicy';
@@ -23,8 +25,21 @@ import CorporateInfo from './pages/CorporateInfo';
 
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) {
+      setTimeout(() => {
+        const id = hash.replace('#', '');
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+      }, 50);
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
   return null;
 }
 
@@ -38,7 +53,9 @@ function AppContent({ theme, toggleTheme }) {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/team" element={<Team />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/solutions" element={<Solutions />} />
+          <Route path="/team" element={<Navigate to="/projects" replace />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contact" element={<Contact />} />
@@ -56,12 +73,19 @@ function AppContent({ theme, toggleTheme }) {
 }
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(() => {
+    return sessionStorage.getItem('app_initialized') === 'true';
+  });
   const [theme, setTheme] = useState(() => {
     const stored = localStorage.getItem('theme');
     if (stored) return stored;
     return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   });
+
+  const handleLoaderComplete = () => {
+    setLoaded(true);
+    sessionStorage.setItem('app_initialized', 'true');
+  };
 
   const toggleTheme = () => {
     setTheme(prev => {
@@ -88,7 +112,7 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {!loaded && <Loader onComplete={() => setLoaded(true)} />}
+      {!loaded && <Loader onComplete={handleLoaderComplete} />}
       <AppContent theme={theme} toggleTheme={toggleTheme} />
     </BrowserRouter>
   );

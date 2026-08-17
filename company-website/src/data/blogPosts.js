@@ -1,4 +1,4 @@
-import { Bot, Zap, Lock, Cloud } from 'lucide-react';
+import { Bot, Zap, Lock, Cloud, Newspaper, Rocket, Globe } from 'lucide-react';
 
 // Icon + accent per category, so every post in a category looks consistent.
 export const CATEGORY_ICONS = {
@@ -6,16 +6,106 @@ export const CATEGORY_ICONS = {
   Frontend: Zap,
   Security: Lock,
   'Cloud & DevOps': Cloud,
+  'Company News': Newspaper,
+  'Project Updates': Rocket,
+  'Industry Insights': Globe,
 };
 
 export const BLOG_POSTS = [
+  {
+    slug: 'hemmingway-technologies-founded-2026',
+    title: 'Hemmingway Technologies Is Officially Incorporated',
+    excerpt:
+      'We\'re proud to announce the official incorporation of Hemmingway Technologies Private Limited — a company born from a hackathon win and a shared vision for building software that matters.',
+    category: 'Company News',
+    author: 'Janardhan Verma',
+    date: '2026-03-15',
+    readTime: '4 min read',
+    tags: ['Company', 'Milestone', 'Founding'],
+    content: [
+      {
+        heading: 'From hackathon to incorporation',
+        body: 'What started as a 36-hour sprint at Smart India Hackathon 2025 has become something much bigger. On 9th March 2026, Hemmingway Technologies Private Limited was officially incorporated under the Ministry of Corporate Affairs, registered in New Delhi. This marks the beginning of our journey as a formal entity — with a clear mission to build technology that solves real-world problems.',
+      },
+      {
+        heading: 'Why the name Hemmingway?',
+        body: 'Ernest Hemingway was known for clarity, precision, and saying more with less. Those are the same principles we bring to software engineering. Clean code. Clear architecture. Solutions that do exactly what they need to do, without unnecessary complexity. The extra "m" is our small reminder that we\'re not trying to be anyone else — just the best version of ourselves.',
+      },
+      {
+        heading: 'Our founding team',
+        body: 'Hemmingway Technologies was founded by Janardhan Verma and Sakshi Yadav, both appointed as Directors and signatories of the company. Together, they bring complementary strengths in technology, operations, and business development — united by a shared experience of building under pressure at SIH and a belief that the best companies are built by teams that ship.',
+      },
+      {
+        heading: 'What\'s ahead',
+        body: 'Incorporation is just the first step. We\'re actively developing our flagship project, Suraksha Sathi, continuing our collaboration with CMPDI and the Ministry of Coal, and expanding our service offerings across custom software development, AI/ML, cloud architecture, and cybersecurity. There\'s a lot of building ahead — and we couldn\'t be more ready for it.',
+      },
+    ],
+  },
+  {
+    slug: 'sih-2025-national-win',
+    title: 'How We Won Smart India Hackathon 2025 — And What It Taught Us',
+    excerpt:
+      'Our team Vajra Dev from NSUT won the Smart India Hackathon 2025 grand prize. Here\'s the story of 36 sleepless hours, a mine safety problem, and the prototype that started a company.',
+    category: 'Company News',
+    author: 'Janardhan Verma',
+    date: '2026-01-10',
+    readTime: '6 min read',
+    tags: ['SIH', 'Hackathon', 'Achievement'],
+    content: [
+      {
+        heading: 'The challenge',
+        body: 'Smart India Hackathon is India\'s largest open innovation platform, with over 1.5 lakh participants competing across hundreds of problem statements from government ministries and organizations. Our team — Vajra Dev, from Netaji Subhas University of Technology — was assigned problem SIH25181: build a software solution for the Ministry of Coal through CMPDI (Central Mine Planning & Design Institute) to address mine safety compliance.',
+      },
+      {
+        heading: '36 hours of building',
+        body: 'The hackathon format is simple but brutal: 36 continuous hours to go from problem statement to working prototype. No breaks that matter. Our team divided into workstreams — backend architecture, frontend UX, data modeling, and presentation — and shipped a production-grade app prototype that the judges could actually use. Not a pitch deck. Not a mockup. A working system.',
+      },
+      {
+        heading: 'What the judges saw',
+        body: 'The winning factor wasn\'t just technical polish — it was our understanding of the problem domain. We spent the first several hours researching mine safety regulations, speaking with domain experts at the event, and mapping actual compliance workflows before writing a line of code. When we presented, we could speak to the real operational challenges that mine safety officers face daily.',
+      },
+      {
+        heading: 'From trophy to company',
+        body: 'Winning SIH didn\'t just give us a trophy — it gave us conviction. The problem was real, the solution was needed, and we had demonstrated we could build under pressure. Three months later, Hemmingway Technologies was incorporated, and Suraksha Sathi became our flagship project. The hackathon taught us that the best companies aren\'t born from business plans — they\'re born from shipping.',
+      },
+    ],
+  },
+  {
+    slug: 'suraksha-sathi-development-update',
+    title: 'Suraksha Sathi: Building a Mine Safety Platform for India',
+    excerpt:
+      'An update on our flagship project — a mine safety compliance platform developed in collaboration with CMPDI under the Ministry of Coal.',
+    category: 'Project Updates',
+    author: 'Sakshi Yadav',
+    date: '2026-06-20',
+    readTime: '5 min read',
+    tags: ['Suraksha Sathi', 'Mine Safety', 'Gov-Tech'],
+    content: [
+      {
+        heading: 'The problem we\'re solving',
+        body: 'India\'s coal mining industry employs hundreds of thousands of workers, and safety compliance is a critical challenge. Regulatory frameworks exist, but the tools for tracking, enforcing, and improving compliance are often outdated or manual. Suraksha Sathi aims to bridge this gap with a modern, digital-first approach to mine safety management.',
+      },
+      {
+        heading: 'Our approach',
+        body: 'Rather than building a generic compliance tool and hoping it fits the mining industry, we\'ve worked closely with domain experts from CMPDI to understand actual on-ground workflows. The platform is designed around real regulatory requirements, real inspection processes, and real reporting needs — not theoretical ones.',
+      },
+      {
+        heading: 'Technology choices',
+        body: 'Suraksha Sathi is built on a modern stack — React for the frontend, a robust backend architecture, and data systems designed to handle the scale of India\'s mining operations. We\'re exploring the integration of AI/ML capabilities for predictive safety analytics, though the core platform focuses on reliability and usability above all else.',
+      },
+      {
+        heading: 'What\'s next',
+        body: 'We\'re continuing development in close collaboration with our government partners. Our goal is to deliver a platform that genuinely improves worker safety outcomes — not just checks compliance boxes. More updates will follow as we reach key milestones.',
+      },
+    ],
+  },
   {
     slug: 'building-ai-powered-systems-at-scale',
     title: 'Building AI-Powered Systems at Scale',
     excerpt:
       'What actually breaks when you take a machine learning pipeline from a notebook prototype to a system handling millions of events a day — and how to design around it.',
     category: 'AI/ML',
-    author: 'Devyansh Dingolia',
+    author: 'Janardhan Verma',
     date: '2026-07-05',
     readTime: '8 min read',
     tags: ['AI', 'Performance', 'Architecture'],
@@ -26,19 +116,44 @@ export const BLOG_POSTS = [
       },
       {
         heading: 'Decouple inference from your request path',
-        body: "The biggest mistake we see teams make is calling a model synchronously inside the same request that a user is waiting on. Once volume grows, that single decision determines your entire latency budget. Wherever the workload allows it, push inference behind a queue, batch requests where the model supports it, and cache aggressively for repeated inputs. This alone is usually the difference between a system that degrades gracefully under load and one that falls over.",
+        body: "The biggest mistake we see teams make is calling a model synchronously inside the same request that a user is waiting on. Once volume grows, that single decision determines your entire latency budget. Wherever the workload allows it, push inference behind a queue, batch requests where the model supports it, and cache aggressively for repeated inputs.",
       },
       {
         heading: 'Version everything, not just the model',
-        body: "Model weights, feature transformations, and the code that assembles inputs all drift independently over time. If you can't answer 'which exact combination of these three produced this prediction six weeks ago', debugging a regression becomes guesswork. Treat your feature pipeline and preprocessing logic with the same versioning discipline as the model artifact itself.",
+        body: "Model weights, feature transformations, and the code that assembles inputs all drift independently over time. If you can't answer 'which exact combination of these three produced this prediction six weeks ago', debugging a regression becomes guesswork.",
       },
       {
         heading: 'Design for graceful degradation',
-        body: "Models fail in ways traditional software doesn't — a confident wrong answer instead of a clean error. Build fallbacks: a simpler heuristic, a cached prior result, or a conservative default when confidence scores drop below a threshold. Systems that can degrade gracefully under model uncertainty are far more trustworthy in production than ones that assume the model is always right.",
+        body: "Models fail in ways traditional software doesn't — a confident wrong answer instead of a clean error. Build fallbacks: a simpler heuristic, a cached prior result, or a conservative default when confidence scores drop below a threshold.",
+      },
+    ],
+  },
+  {
+    slug: 'mine-safety-technology-india',
+    title: 'The State of Mine Safety Technology in India',
+    excerpt:
+      'India\'s mining sector is at an inflection point — legacy compliance systems are giving way to digital-first safety platforms. Here\'s what the landscape looks like and where we see it heading.',
+    category: 'Industry Insights',
+    author: 'Sakshi Yadav',
+    date: '2026-05-15',
+    readTime: '6 min read',
+    tags: ['Mine Safety', 'India', 'Technology'],
+    content: [
+      {
+        heading: 'A sector in transition',
+        body: 'India is one of the world\'s largest coal producers, with Coal India Limited alone employing over 200,000 people. Safety in this sector has historically relied on manual processes — paper-based inspections, physical logbooks, and periodic audits. The technology gap is significant, and the human cost of that gap is measured in lives.',
       },
       {
-        heading: 'What this looks like in practice',
-        body: "In our own pipelines, this combination — async inference, aggressive caching, strict artifact versioning, and confidence-based fallbacks — is what let us move from a few thousand daily predictions to well over a million without a rewrite. None of it is exotic. It's the same discipline that makes any distributed system reliable, applied to a component that happens to be probabilistic.",
+        heading: 'What digital compliance looks like',
+        body: 'Modern mine safety platforms can digitize inspection workflows, provide real-time monitoring of safety parameters, and generate compliance reports automatically. The value isn\'t just efficiency — it\'s visibility. When safety data is digital, patterns emerge that manual processes can\'t detect.',
+      },
+      {
+        heading: 'The role of AI in predictive safety',
+        body: 'Perhaps the most promising frontier is using machine learning to move from reactive safety management to predictive. By analyzing historical incident data, environmental sensors, and operational patterns, AI systems can flag high-risk conditions before incidents occur — shifting the paradigm from "investigate after the fact" to "prevent before it happens."',
+      },
+      {
+        heading: 'Where we fit in',
+        body: 'At Hemmingway Technologies, we\'re building Suraksha Sathi with exactly this vision in mind — starting with robust compliance digitization and building toward intelligent safety analytics. The mining industry deserves the same quality of software that other sectors take for granted.',
       },
     ],
   },
@@ -59,217 +174,44 @@ export const BLOG_POSTS = [
       },
       {
         heading: 'Put a cost ceiling on every feature',
-        body: 'Token costs scale with usage in a way that traditional compute costs don\'t always make obvious until the invoice arrives. Before shipping, know your worst-case cost per user session, and put a hard limit somewhere in the stack — not just a dashboard alert after the fact.',
+        body: 'Token costs scale with usage in a way that traditional compute costs don\'t always make obvious until the invoice arrives. Before shipping, know your worst-case cost per user session, and put a hard limit somewhere in the stack.',
       },
       {
         heading: 'Build a lightweight eval set early',
-        body: "You don't need an elaborate evaluation framework on day one — a spreadsheet of thirty realistic inputs with expected outcomes is enough to catch regressions when you change a prompt or swap a model. Teams that skip this end up debugging prompt changes by vibes, which doesn't scale past the second engineer touching the code.",
+        body: "You don't need an elaborate evaluation framework on day one — a spreadsheet of thirty realistic inputs with expected outcomes is enough to catch regressions when you change a prompt or swap a model.",
       },
       {
-        heading: "Keep the model swappable",
+        heading: 'Keep the model swappable',
         body: 'Model providers, pricing, and capabilities shift quickly. Wrap model calls behind a thin abstraction from the start so that switching providers — or running two in parallel to compare quality — is a config change, not a rewrite.',
       },
-      {
-        heading: 'Where LLMs earn their place',
-        body: "The integrations that hold up long-term are the ones solving a genuinely fuzzy problem — summarization, classification of messy inputs, natural-language interfaces — not the ones bolted onto a workflow that a deterministic rule would have handled better and cheaper.",
-      },
     ],
   },
   {
-    slug: 'react-performance-optimizations',
-    title: 'React Performance Optimizations That Saved 40% Bundle Size',
+    slug: 'govtech-software-development-lessons',
+    title: 'Lessons from Building Gov-Tech Software in India',
     excerpt:
-      'Code splitting, lazy loading, and tree-shaking are easy to say and easy to get wrong. A walkthrough of the changes that actually moved the needle.',
-    category: 'Frontend',
-    author: 'Manish Mandia',
-    date: '2026-06-28',
-    readTime: '10 min read',
-    tags: ['React', 'Performance', 'Bundling'],
+      'Working with government organizations teaches you things that enterprise clients don\'t — about scale, inclusivity, and building for users you\'ll never meet in a design sprint.',
+    category: 'Industry Insights',
+    author: 'Janardhan Verma',
+    date: '2026-04-10',
+    readTime: '5 min read',
+    tags: ['Gov-Tech', 'India', 'Software Development'],
     content: [
       {
-        heading: 'Measure before you optimize',
-        body: "Bundle analysis tools exist for a reason — guessing which dependency is bloating your build wastes far more time than running the analyzer. In our case, a single charting library we used on one settings page was responsible for nearly a fifth of our total bundle size.",
+        heading: 'The user base is different',
+        body: 'When you\'re building for a government ministry, your users span an enormous range of technical literacy, device quality, and connectivity. A design that works on a flagship phone in an air-conditioned office might fail completely for an inspector using a budget Android phone in a remote mine site. Designing for inclusion isn\'t a nice-to-have — it\'s a core requirement.',
       },
       {
-        heading: 'Route-level code splitting first',
-        body: "The highest-leverage change is almost always splitting by route. Users landing on your homepage shouldn't download the JavaScript for your admin dashboard. This is usually a few lines of dynamic import and delivers the biggest single win before you touch anything else.",
+        heading: 'Reliability over features',
+        body: 'Government stakeholders don\'t care about your feature velocity — they care about whether the system works when it\'s needed. A platform that does three things reliably is infinitely more valuable than one that does thirty things inconsistently. We learned early to ruthlessly prioritize stability and simplicity.',
       },
       {
-        heading: 'Audit your dependency tree, not just your code',
-        body: "Utility libraries pulled in for a single function, date libraries that ship every locale by default, icon packs imported wholesale instead of per-icon — these add up quietly. We replaced three separate utility imports with native JS equivalents and lost nothing but bytes.",
+        heading: 'Documentation is a deliverable',
+        body: 'In enterprise SaaS, you can sometimes get away with "intuitive UI" as your documentation strategy. In gov-tech, your documentation is a formal deliverable — training manuals, administrator guides, compliance documentation. This discipline actually makes the entire product better.',
       },
       {
-        heading: 'Lazy-load below the fold',
-        body: "Images, heavy interactive widgets, and anything not visible on initial paint should load on demand. Combined with route splitting, this is what took our largest pages from a multi-second first load down to something that feels instant on a typical connection.",
-      },
-      {
-        heading: 'Keep a budget, not just a one-time fix',
-        body: "The bundle size conversation doesn't end after one cleanup pass. We added a CI check that fails the build if bundle size regresses past a threshold, which has caught more accidental bloat than any manual review ever did.",
-      },
-    ],
-  },
-  {
-    slug: 'design-systems-that-scale',
-    title: 'Design Systems That Scale With Your Team',
-    excerpt:
-      'A design system is only as good as its adoption. Notes on building one that engineers and designers both actually want to use.',
-    category: 'Frontend',
-    author: 'Yash Kumar',
-    date: '2026-05-30',
-    readTime: '7 min read',
-    tags: ['Design', 'System Design', 'Collaboration'],
-    content: [
-      {
-        heading: 'Start from real screens, not a blank Figma file',
-        body: "The design systems that get adopted are extracted from components that already exist and already work, then generalized. The ones that get ignored are built top-down in isolation and never quite match what engineering actually needs to ship.",
-      },
-      {
-        heading: 'Tokens before components',
-        body: "Getting color, spacing, and typography values into a shared token system pays off before a single reusable component exists — it's what keeps a growing product visually coherent even while the component library is still catching up.",
-      },
-      {
-        heading: 'Documentation is part of the product',
-        body: 'A component without a usage example and a "when not to use this" note gets reinvented by the next engineer who needs something similar. We treat the documentation site itself as a shipped product with its own backlog, not an afterthought.',
-      },
-      {
-        heading: 'Make the right choice the easy choice',
-        body: "Adoption follows friction, not policy. If pulling a button from the shared library is slower than writing a new one from scratch, engineers will write a new one — and now you have two buttons to maintain. Lint rules and editor snippets that surface the system components matter as much as the components themselves.",
-      },
-      {
-        heading: 'Expect it to keep changing',
-        body: "A design system isn't a deliverable you finish — it's a shared language that should evolve alongside the product. The teams that keep it healthy are the ones who budget ongoing time for it instead of treating the first version as the last.",
-      },
-    ],
-  },
-  {
-    slug: 'zero-trust-security-in-microservices',
-    title: 'Zero-Trust Security in Microservices',
-    excerpt:
-      'Implementing zero-trust across dozens of services without breaking deployments — what we changed first, and what we left alone.',
-    category: 'Security',
-    author: 'Bhardwaj Kartikay',
-    date: '2026-06-10',
-    readTime: '12 min read',
-    tags: ['Security', 'Microservices', 'DevOps'],
-    content: [
-      {
-        heading: "Stop trusting the network boundary",
-        body: "Traditional perimeter security assumes anything inside your VPC is safe. Once you have more than a handful of services, that assumption becomes the biggest risk in the system — a single compromised service should never mean automatic access to everything else behind the firewall.",
-      },
-      {
-        heading: 'Service identity, not IP allowlists',
-        body: "Every service should authenticate with a verifiable identity — a short-lived certificate or signed token — rather than being trusted because of where it's running. This makes access auditable and revocable in a way that IP-based rules never are.",
-      },
-      {
-        heading: 'Roll it out incrementally',
-        body: "Flipping zero-trust on for an entire mesh at once is how deployments break. We moved service by service, running the new authorization checks in log-only mode first to see what would have been blocked, before enforcing anything. That caught several legitimate but undocumented service-to-service calls before they became outages.",
-      },
-      {
-        heading: 'Least privilege is a process, not a setting',
-        body: 'Granting a service exactly the permissions it needs on day one is achievable. Keeping it that way as the codebase changes is the actual challenge — permissions tend to only get added, rarely removed. Periodic access reviews aren\'t exciting work, but they\'re what keeps "least privilege" true six months later.',
-      },
-      {
-        heading: 'The payoff',
-        body: "The result isn't just better security posture on paper — it's a system where a single compromised credential or service has a contained blast radius instead of an open door to everything else. That containment is the entire point of zero-trust.",
-      },
-    ],
-  },
-  {
-    slug: 'founders-guide-to-cybersecurity-basics',
-    title: "A Founder's Guide to Cybersecurity Basics",
-    excerpt:
-      'You don\'t need an enterprise security team to avoid the mistakes that cause most early-stage breaches. A pragmatic starting checklist.',
-    category: 'Security',
-    author: 'Sakshi Yadav',
-    date: '2026-05-18',
-    readTime: '6 min read',
-    tags: ['Security', 'Startups', 'Best Practices'],
-    content: [
-      {
-        heading: 'Most breaches aren\'t sophisticated',
-        body: "The overwhelming majority of early-stage security incidents we see aren't nation-state attacks — they're leaked API keys in a public repo, an admin panel with no authentication, or a database left open to the internet during a quick debugging session that never got closed back up.",
-      },
-      {
-        heading: 'Secrets don\'t belong in source control',
-        body: 'Ever. Not in an "example" config, not temporarily, not in a private repo. Use environment variables and a secrets manager from the first commit — retrofitting this after a leak means rotating every credential the repo ever contained, not just the current ones.',
-      },
-      {
-        heading: 'Turn on MFA everywhere it\'s offered',
-        body: 'Your cloud provider, your source control host, your payment processor, your email. This is the single highest-leverage security action available and it costs nothing but a few minutes per account.',
-      },
-      {
-        heading: 'Least-privilege access from day one',
-        body: "It's tempting to give every early team member admin access to everything because it's faster. That convenience compounds into risk as the team grows and people change roles or leave. Start scoped, even when the team is small — it's much harder to tighten access later than to grant it as needed.",
-      },
-      {
-        heading: 'Have a plan before you need one',
-        body: 'Knowing who gets called, what gets rotated, and how you\'ll communicate with users if something does go wrong turns a bad day into a manageable one. Write it down before an incident forces you to improvise it.',
-      },
-    ],
-  },
-  {
-    slug: 'database-optimization-hours-to-milliseconds',
-    title: 'Database Optimization: From Hours to Milliseconds',
-    excerpt:
-      'Query optimization techniques that took our most expensive reporting query from a two-hour batch job to a sub-100ms lookup.',
-    category: 'Cloud & DevOps',
-    author: 'Manish Mandia',
-    date: '2026-05-05',
-    readTime: '9 min read',
-    tags: ['Database', 'SQL', 'Performance'],
-    content: [
-      {
-        heading: 'The query was correct — it just didn\'t scale',
-        body: "The offending query was logically fine when the table had ten thousand rows. At ten million, the same query plan that once seemed harmless was doing a full table scan on every run, and the report it powered was quietly eating a two-hour batch window every night.",
-      },
-      {
-        heading: 'Read the query plan before touching an index',
-        body: "It's tempting to throw an index at any slow query, but adding one blind can make write performance worse without fixing the actual bottleneck. We start with EXPLAIN ANALYZE every time — it usually shows exactly where the plan goes wrong, whether that's a missing index, a bad join order, or an unnecessary sort.",
-      },
-      {
-        heading: 'Denormalize deliberately, not accidentally',
-        body: "For our specific reporting case, the fix wasn't a smarter query — it was pre-aggregating the data into a summary table on a schedule, and querying that instead. Denormalization gets a bad reputation, but used deliberately for known access patterns, it's often the simplest fix available.",
-      },
-      {
-        heading: 'Connection pooling matters more than people expect',
-        body: "Half of our perceived latency wasn't query execution time at all — it was connection overhead under load. Introducing proper pooling reduced tail latency noticeably even before we touched a single query.",
-      },
-      {
-        heading: 'The end result',
-        body: 'Between the summary table, a couple of targeted indexes, and connection pooling, the two-hour batch job became a query that returns in under 100ms on demand — meaning the report went from "runs once a night" to "available live, whenever anyone wants it."',
-      },
-    ],
-  },
-  {
-    slug: 'future-of-full-stack-development',
-    title: 'The Future of Full-Stack Development',
-    excerpt:
-      'The traditional frontend/backend split is dissolving. What that means for how teams are structured and how products actually get built.',
-    category: 'Cloud & DevOps',
-    author: 'Devyansh Dingolia',
-    date: '2026-04-22',
-    readTime: '11 min read',
-    tags: ['Full Stack', 'Architecture', 'Future Tech'],
-    content: [
-      {
-        heading: 'The line was always a bit arbitrary',
-        body: "Frontend and backend were never cleanly separate problems — they were separate problems mostly because the tools forced that split. Server-rendered frameworks, edge functions, and typed end-to-end APIs are quietly erasing a lot of that boundary.",
-      },
-      {
-        heading: 'Type safety across the whole stack changes how teams work',
-        body: "When your frontend and backend share types end-to-end, a huge class of integration bugs simply can't compile. That shifts what full-stack teams spend their time on — less time reconciling mismatched API contracts, more time on the actual product problem.",
-      },
-      {
-        heading: 'Smaller teams, wider ownership',
-        body: 'We\'ve seen this play out directly: a single engineer taking a feature from database schema to deployed UI is now realistic in a way it wasn\'t five years ago, because the tooling gap between "frontend person" and "backend person" has narrowed substantially.',
-      },
-      {
-        heading: 'This doesn\'t mean specialization disappears',
-        body: 'Deep expertise in database performance, distributed systems, or interaction design still matters — arguably more, since it\'s now a differentiator rather than a baseline requirement. What changes is that fewer people need to be gatekept out of the other half of the stack just to ship a feature.',
-      },
-      {
-        heading: 'What we\'re building toward',
-        body: "The teams that will move fastest over the next few years are the ones that hire for range as much as depth, and build on tooling that doesn't force an artificial wall between the parts of the product that happen to run on different machines.",
+        heading: 'The impact is real',
+        body: 'The upside of gov-tech work is that the impact is tangible and measured in outcomes that matter: worker safety improvements, compliance rates, time saved by civil servants. It\'s deeply motivating work, and it\'s a privilege to contribute to it.',
       },
     ],
   },

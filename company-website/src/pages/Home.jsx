@@ -10,7 +10,7 @@ import Antigravity from '../components/ui/Antigravity';
 const SERVICES = [
   { Icon: Zap, title: 'Custom Software', desc: 'Bespoke applications engineered for your unique business challenges, built to scale from day one.' },
   { Icon: Brain, title: 'AI & Machine Learning', desc: 'Intelligent systems that learn, adapt, and make data-driven decisions — transforming your operations.' },
-  { Icon: Cloud, title: 'Cloud Architecture', desc: 'Scalable, resilient cloud infrastructure designed for 99.99% uptime and global performance.' },
+  { Icon: Cloud, title: 'Cloud Architecture', desc: 'Scalable, resilient cloud infrastructure designed for high availability and global performance.' },
   { Icon: Lock, title: 'Cybersecurity', desc: 'Enterprise-grade security solutions protecting your data, users, and business continuity.' },
   { Icon: Smartphone, title: 'Mobile & Web', desc: 'Beautiful, performant applications across every platform — web, iOS, and Android.' },
   { Icon: LinkIcon, title: 'API & Integrations', desc: 'Seamless connectivity between your tools, platforms, and third-party services.' },
@@ -54,7 +54,7 @@ export default function Home() {
         <div className="hero-content container">
           <div className="hero-badge">
             <span />
-            Now Available — Enterprise Plans
+            SIH 2025 National Winners — Building India's Digital Future
           </div>
           <h1>
             Software That<br />
@@ -144,7 +144,7 @@ export default function Home() {
               <div data-reveal>
                 <div className="bento-badge">Security</div>
                 <h3>Zero-compromise security baked in from line one</h3>
-                <p>SOC 2 compliant. GDPR ready. Every system we build meets enterprise security standards by default.</p>
+                <p>Security-first architecture. Every system we build follows enterprise security best practices by default.</p>
                 <div className="bento-orbit">
                   <div className="orbit-ring"><div className="orbit-dot" /></div>
                   <div className="orbit-center">🔐</div>
@@ -206,7 +206,7 @@ export default function Home() {
                 Start Your Project
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </Link>
-              <Link to="/about" className="btn-ghost">Meet the Team</Link>
+              <Link to="/projects" className="btn-ghost">Our Projects</Link>
             </div>
           </div>
         </div>

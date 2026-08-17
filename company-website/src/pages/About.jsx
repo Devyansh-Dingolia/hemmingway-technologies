@@ -1,6 +1,6 @@
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { BadgeInfo, Building2, Hash, Landmark, Layers3, School2, Trophy, MapPin, Users } from 'lucide-react';
+import { DIRECTORS } from '../data/companyInfo';
 import { useScrollReveal, useGSAPReveal } from '../hooks/useAnimations';
 import EncryptedText from '../components/ui/EncryptedText';
 import CometCard from '../components/ui/CometCard';
@@ -23,7 +23,7 @@ const SIH_META = [
   { icon: Hash, label: 'Team ID', value: '102387' },
 ];
 
-const FOUNDERS = ['Janardhan Verma', 'Devyansh Dingolia', 'Manish Mandia', 'Yash Kumar', 'Bhardwaj Kartikay', 'Sakshi Yadav'];
+const FOUNDERS = ['Janardhan Verma', 'Sakshi Yadav'];
 
 export default function About() {
   useScrollReveal();
@@ -50,7 +50,7 @@ export default function About() {
             <span className="gradient-text">for ambitious teams</span>
           </h1>
           <p>
-            6 NSUT Founders. One hackathon win. <br /> A company born from 36 hours of relentless building.
+            Two founders. One hackathon win. <br /> A company born from 36 hours of relentless building.
           </p>
         </div>
       </section>
@@ -123,6 +123,13 @@ export default function About() {
                 />
               </p>
 
+              {/* Vision */}
+              <p className="fade-up origin-lead" style={{ transitionDelay: '0.25s', fontSize: '15px', marginTop: '24px' }}>
+                Our vision is to build technology that transforms industries —
+                from mine safety and government infrastructure to AI-powered enterprise solutions.
+                We're just getting started.
+              </p>
+
               {/* Stats row */}
               <div className="origin-stats fade-up" style={{ transitionDelay: '0.35s' }}>
                 <div className="origin-stat">
@@ -173,16 +180,45 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="cta-section">
+      {/* ── FOUNDERS ── */}
+      <section className="about-values" style={{ paddingBottom: '160px' }}>
         <div className="container">
-          <div className="cta-inner fade-up">
-            <div className="tag" style={{ margin: '0 auto 24px' }}>Join Us</div>
-            <h2>Want to build the<br /><span className="gradient-text">future with us?</span></h2>
-            <p>We're always looking for talented engineers, designers, and strategists who share our values.</p>
-            <div className="cta-buttons">
-              <Link to="/contact" className="btn-primary">Get in Touch</Link>
-            </div>
+          <div className="section-header fade-up">
+            <div className="tag">Founders</div>
+            <h2>The people behind<br /><span className="gradient-text">Hemmingway Technologies</span></h2>
+          </div>
+          <div className="values-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', maxWidth: '700px', margin: '48px auto 0' }}>
+            {DIRECTORS.map((director) => (
+              <CometCard key={director.id} className="value-card">
+                <div data-reveal style={{ padding: '0', textAlign: 'center' }}>
+                  <div style={{
+                    width: 72, height: 72, borderRadius: '20px',
+                    background: `linear-gradient(135deg, ${director.color1}, ${director.color2})`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: '#fff', fontWeight: 700, fontSize: '22px',
+                    fontFamily: 'var(--heading)', margin: '0 auto 16px',
+                  }}>
+                    {director.initials}
+                  </div>
+                  <h3 style={{ marginBottom: '4px' }}>{director.name}</h3>
+                  <p style={{ margin: '0 0 4px', color: 'var(--primary)', fontWeight: 600, fontSize: '14px' }}>Founder & Director</p>
+                  <p style={{ margin: '0 0 8px', fontSize: '12px', fontFamily: 'var(--mono)', color: 'var(--text)' }}>DIN {director.din}</p>
+                  {director.linkedin && (
+                    <a
+                      href={director.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: 'var(--text)', transition: 'color 0.2s' }}
+                      onMouseEnter={e => e.currentTarget.style.color = 'var(--primary)'}
+                      onMouseLeave={e => e.currentTarget.style.color = 'var(--text)'}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.6a1.6 1.6 0 0 0-1.6 1.6c0 .88.72 1.6 1.6 1.6a1.6 1.6 0 0 0 1.6-1.6c0-.88-.72-1.6-1.6-1.6Z"/></svg>
+                      LinkedIn
+                    </a>
+                  )}
+                </div>
+              </CometCard>
+            ))}
           </div>
         </div>
       </section>

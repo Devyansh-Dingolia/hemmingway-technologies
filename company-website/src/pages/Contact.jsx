@@ -279,9 +279,9 @@ export default function Contact() {
 
               <div style={{ marginTop: '48px' }}>
                 {[
-                  { icon: '📍', label: 'Headquarters', value: 'RZ F1/380, Mahavir Enclave, New Delhi' },
-                  { icon: '✉️', label: 'Email', value: 'hemmingway.tech@gmail.com' },
-                  { icon: '📞', label: 'Phone', value: '+91 7011012021' },
+                  { icon: '📍', label: 'Headquarters', value: '4th Floor, RZ F-1/380, T/F Kh No 84/15, Palam Village, New Delhi – 110045' },
+                  { icon: '✉️', label: 'Email', value: 'hemmingways.tech@gmail.com' },
+                  { icon: '📞', label: 'Phone', value: '+91 8750908167' },
                   { icon: '🕐', label: 'Hours', value: 'Mon–Fri, 9am–6pm IST' },
                 ].map((item, i) => (
                   <div
