@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Rocket, Brain, Cloud, Lock, Moon, Sun } from 'lucide-react';
+import { Zap, Brain, Cloud, Lock, Moon, Sun } from 'lucide-react';
 
 /* ─────────────────────────────────────────
    Aceternity-style dropdown components
@@ -24,10 +24,11 @@ function HoveredLink({ href, to, children }) {
   return <a href={href} style={style} onMouseEnter={onEnter} onMouseLeave={onLeave}>{children}</a>;
 }
 
-function ProductItem({ title, description, href, Icon }) {
+function ProductItem({ title, description, href, Icon, onClick }) {
   return (
-    <a
-      href={href}
+    <Link
+      to={href}
+      onClick={onClick}
       className="product-item"
       style={{ textDecoration: 'none', display: 'flex', gap: '12px', alignItems: 'flex-start', padding: '8px', borderRadius: '10px', transition: 'background 0.2s' }}
       onMouseEnter={e => (e.currentTarget.style.background = 'var(--primary-light)')}
@@ -40,11 +41,11 @@ function ProductItem({ title, description, href, Icon }) {
         <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-bright)', marginBottom: 3 }}>{title}</div>
         <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.4 }}>{description}</div>
       </div>
-    </a>
+    </Link>
   );
 }
 
-function MenuItem({ label, children, active, setActive }) {
+function MenuItem({ label, to = '/solutions', children, active, setActive }) {
   const isOpen = active === label;
   return (
     <div
@@ -52,12 +53,16 @@ function MenuItem({ label, children, active, setActive }) {
       onMouseEnter={() => setActive(label)}
       onMouseLeave={() => setActive(null)}
     >
-      <button className={`menu-item-btn${isOpen ? ' open' : ''}`}>
+      <Link
+        to={to}
+        className={`menu-item-btn${isOpen ? ' open' : ''}`}
+        onClick={() => setActive(null)}
+      >
         {label}
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ transition: 'transform 0.3s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', marginLeft: 4 }}>
           <path d="M6 9l6 6 6-6" />
         </svg>
-      </button>
+      </Link>
 
       <div className={`menu-dropdown${isOpen ? ' open' : ''}`}>
         <div className="menu-dropdown-inner">
@@ -159,16 +164,16 @@ export default function Navbar({ theme, toggleTheme }) {
           <div className="nav-menu-center">
             <NavLink to="/" label="Home" isActive={isActive('/')} />
             <NavLink to="/about" label="About" isActive={isActive('/about')} />
-            <NavLink to="/team" label="Team" isActive={isActive('/team')} />
+            <NavLink to="/projects" label="Projects" isActive={isActive('/projects')} />
             <NavLink to="/blog" label="Blog" isActive={isActive('/blog')} />
-            <NavLink to="/corporate-info" label="Corporate" isActive={isActive('/corporate-info')} />
+            <NavLink to="/corporate-info" label="Corporate Info" isActive={isActive('/corporate-info')} />
 
             <MenuItem label="Solutions" active={activeMenu} setActive={setActiveMenu}>
               <div className="dropdown-products">
-                <ProductItem Icon={Rocket} title="Launchpad" description="From idea to production-ready MVP in 6 weeks." href="#" />
-                <ProductItem Icon={Brain} title="AI Suite" description="Custom LLM integrations & intelligent automation." href="#" />
-                <ProductItem Icon={Cloud} title="CloudOps" description="Managed cloud infrastructure at enterprise scale." href="#" />
-                <ProductItem Icon={Lock} title="SecureStack" description="Full-stack security audit & hardening service." href="#" />
+                <ProductItem Icon={Zap} title="Custom Software" description="Bespoke applications engineered for your business." href="/solutions#custom-software" onClick={() => setActiveMenu(null)} />
+                <ProductItem Icon={Brain} title="AI & Machine Learning" description="Intelligent systems that learn, adapt, and decide." href="/solutions#ai-ml" onClick={() => setActiveMenu(null)} />
+                <ProductItem Icon={Cloud} title="Cloud Architecture" description="Scalable, resilient infrastructure at enterprise scale." href="/solutions#cloud" onClick={() => setActiveMenu(null)} />
+                <ProductItem Icon={Lock} title="Cybersecurity" description="Enterprise-grade security across your stack." href="/solutions#cybersecurity" onClick={() => setActiveMenu(null)} />
               </div>
             </MenuItem>
           </div>
@@ -208,16 +213,16 @@ export default function Navbar({ theme, toggleTheme }) {
           <div className="nav-menu-center">
             <NavLink to="/" label="Home" isActive={isActive('/')} />
             <NavLink to="/about" label="About" isActive={isActive('/about')} />
-            <NavLink to="/team" label="Team" isActive={isActive('/team')} />
+            <NavLink to="/projects" label="Projects" isActive={isActive('/projects')} />
             <NavLink to="/blog" label="Blog" isActive={isActive('/blog')} />
-            <NavLink to="/corporate-info" label="Corporate" isActive={isActive('/corporate-info')} />
+            <NavLink to="/corporate-info" label="Corporate Info" isActive={isActive('/corporate-info')} />
 
             <MenuItem label="Solutions" active={activeMenu} setActive={setActiveMenu}>
               <div className="dropdown-products">
-                <ProductItem Icon={Rocket} title="Launchpad" description="From idea to production-ready MVP in 6 weeks." href="#" />
-                <ProductItem Icon={Brain} title="AI Suite" description="Custom LLM integrations & intelligent automation." href="#" />
-                <ProductItem Icon={Cloud} title="CloudOps" description="Managed cloud infrastructure at enterprise scale." href="#" />
-                <ProductItem Icon={Lock} title="SecureStack" description="Full-stack security audit & hardening service." href="#" />
+                <ProductItem Icon={Zap} title="Custom Software" description="Bespoke applications engineered for your business." href="/solutions#custom-software" onClick={() => setActiveMenu(null)} />
+                <ProductItem Icon={Brain} title="AI & Machine Learning" description="Intelligent systems that learn, adapt, and decide." href="/solutions#ai-ml" onClick={() => setActiveMenu(null)} />
+                <ProductItem Icon={Cloud} title="Cloud Architecture" description="Scalable, resilient infrastructure at enterprise scale." href="/solutions#cloud" onClick={() => setActiveMenu(null)} />
+                <ProductItem Icon={Lock} title="Cybersecurity" description="Enterprise-grade security across your stack." href="/solutions#cybersecurity" onClick={() => setActiveMenu(null)} />
               </div>
             </MenuItem>
           </div>
