@@ -2418,24 +2418,25 @@
   box-shadow: 0 8px 24px rgba(99,103,241,0.2);
 }
 
-/* ──────────── SINGLE UNIFIED CARD (#EAEBEE SOLID) ──────────── */
+/* ──────────── SINGLE UNIFIED CARD (DARK THEME DEFAULT) ──────────── */
 .corp-single-card {
   position: relative;
-  background: #EAEBEE;
-  border: 1px solid #d1d5db;
+  background: #0d0f1e;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 28px;
   overflow: hidden;
   box-shadow:
-    0 20px 50px rgba(0, 0, 0, 0.22),
-    0 2px 8px rgba(0, 0, 0, 0.06);
+    0 24px 64px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .corp-single-card:hover {
-  border-color: #94a3b8;
+  border-color: rgba(99, 103, 241, 0.45);
   box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.28),
-    0 0 30px rgba(99, 103, 241, 0.1);
+    0 32px 80px rgba(0, 0, 0, 0.8),
+    0 0 50px rgba(99, 103, 241, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.12) inset;
 }
 
 .corp-single-card-header {
@@ -2443,8 +2444,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 28px 36px;
-  background: #dfe2e7;
-  border-bottom: 1px solid #d1d5db;
+  background: #13162b;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   gap: 20px;
   flex-wrap: wrap;
 }
@@ -2459,19 +2460,18 @@
   width: 48px;
   height: 48px;
   border-radius: 14px;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
+  background: rgba(99, 103, 241, 0.18);
+  border: 1px solid rgba(99, 103, 241, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .corp-single-card-title {
   font-size: 19px;
   font-weight: 700;
-  color: #0f172a !important;
+  color: #ffffff;
   margin: 0 0 3px;
   font-family: var(--heading);
   letter-spacing: -0.2px;
@@ -2479,15 +2479,15 @@
 
 .corp-single-card-subtitle {
   font-size: 13px;
-  color: #475569 !important;
+  color: #94a3b8;
 }
 
 .corp-single-card-status {
   font-size: 12px;
   font-weight: 700;
-  color: #15803d;
-  background: #dcfce7;
-  border: 1px solid #86efac;
+  color: #4ade80;
+  background: rgba(34, 197, 94, 0.14);
+  border: 1px solid rgba(34, 197, 94, 0.35);
   border-radius: 100px;
   padding: 6px 16px;
   letter-spacing: 0.3px;
@@ -2496,7 +2496,7 @@
 .corp-single-card-body {
   display: flex;
   flex-direction: column;
-  background: #EAEBEE;
+  background: #0d0f1e;
 }
 
 .corp-card-row {
@@ -2504,7 +2504,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 22px 36px;
-  border-bottom: 1px solid #d4d7e0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   gap: 20px;
   transition: background 0.2s ease;
 }
@@ -2514,7 +2514,7 @@
 }
 
 .corp-card-row:hover {
-  background: #dfe2e8;
+  background: #14172b;
 }
 
 .corp-card-row-left {
@@ -2528,14 +2528,12 @@
   width: 40px;
   height: 40px;
   border-radius: 11px;
-  border: 1px solid #cbd5e1 !important;
-  background: #ffffff !important;
+  border: 1px solid;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   transition: transform 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .corp-card-row:hover .corp-card-row-icon {
@@ -2553,7 +2551,7 @@
   font-weight: 700;
   letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: #64748b !important;
+  color: #94a3b8;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -2564,15 +2562,14 @@
   font-weight: 700;
   padding: 2px 6px;
   border-radius: 4px;
-  border: 1px solid #cbd5e1;
-  background: #ffffff;
+  border: 1px solid;
   letter-spacing: 0.5px;
 }
 
 .corp-card-row-value {
   font-size: 15.5px;
   font-weight: 600;
-  color: #0f172a !important;
+  color: #ffffff;
   line-height: 1.4;
 }
 
@@ -2593,21 +2590,20 @@
   gap: 6px;
   font-size: 12px;
   font-weight: 600;
-  color: #1e293b;
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 8px;
   padding: 7px 15px;
   cursor: pointer;
   font-family: var(--sans);
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 .corp-copy-btn:hover {
   color: #ffffff;
-  border-color: #0f172a;
-  background: #0f172a;
+  border-color: var(--primary);
+  background: rgba(99, 103, 241, 0.35);
 }
 
 /* ──────────────────── DIRECTORS ──────────────────── */
@@ -2820,17 +2816,41 @@
 [data-theme='light'] .corp-single-card {
   background: #EAEBEE;
   border-color: #cbd5e1;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
 }
 
 [data-theme='light'] .corp-single-card:hover {
   border-color: #94a3b8;
-  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
 }
 
 [data-theme='light'] .corp-single-card-header {
   background: #dfe2e7;
   border-bottom-color: #d1d5db;
+}
+
+[data-theme='light'] .corp-single-card-icon {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme='light'] .corp-single-card-title {
+  color: #0f172a;
+}
+
+[data-theme='light'] .corp-single-card-subtitle {
+  color: #475569;
+}
+
+[data-theme='light'] .corp-single-card-status {
+  color: #15803d;
+  background: #dcfce7;
+  border: 1px solid #86efac;
+}
+
+[data-theme='light'] .corp-single-card-body {
+  background: #EAEBEE;
 }
 
 [data-theme='light'] .corp-card-row {
@@ -2841,8 +2861,36 @@
   background: #dfe2e8;
 }
 
+[data-theme='light'] .corp-card-row-icon {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme='light'] .corp-card-row-label {
+  color: #64748b;
+}
+
+[data-theme='light'] .corp-card-row-short {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
+
 [data-theme='light'] .corp-card-row-value {
-  color: #0f172a !important;
+  color: #0f172a;
+}
+
+[data-theme='light'] .corp-copy-btn {
+  color: #1e293b;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme='light'] .corp-copy-btn:hover {
+  color: #ffffff;
+  border-color: #0f172a;
+  background: #0f172a;
 }
 
 
