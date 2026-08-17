@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Zap, Brain, Cloud, Lock, Moon, Sun } from 'lucide-react';
+import { Zap, Brain, Cloud, Lock, Moon, Sun, Building2, Info } from 'lucide-react';
 
 /* ─────────────────────────────────────────
    Aceternity-style dropdown components
@@ -45,24 +45,33 @@ function ProductItem({ title, description, href, Icon, onClick }) {
   );
 }
 
-function MenuItem({ label, to = '/solutions', children, active, setActive }) {
+function MenuItem({ label, to, children, active, setActive }) {
   const isOpen = active === label;
+  const triggerProps = {
+    className: `menu-item-btn${isOpen ? ' open' : ''}`,
+    onClick: () => setActive(null),
+  };
   return (
     <div
       className="menu-item-wrap"
       onMouseEnter={() => setActive(label)}
       onMouseLeave={() => setActive(null)}
     >
-      <Link
-        to={to}
-        className={`menu-item-btn${isOpen ? ' open' : ''}`}
-        onClick={() => setActive(null)}
-      >
-        {label}
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ transition: 'transform 0.3s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', marginLeft: 4 }}>
-          <path d="M6 9l6 6 6-6" />
-        </svg>
-      </Link>
+      {to ? (
+        <Link to={to} {...triggerProps}>
+          {label}
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ transition: 'transform 0.3s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', marginLeft: 4 }}>
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </Link>
+      ) : (
+        <button type="button" {...triggerProps}>
+          {label}
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" style={{ transition: 'transform 0.3s', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', marginLeft: 4 }}>
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+      )}
 
       <div className={`menu-dropdown${isOpen ? ' open' : ''}`}>
         <div className="menu-dropdown-inner">
@@ -163,12 +172,17 @@ export default function Navbar({ theme, toggleTheme }) {
           {/* ── CENTER: Aceternity-style menu ── */}
           <div className="nav-menu-center">
             <NavLink to="/" label="Home" isActive={isActive('/')} />
-            <NavLink to="/about" label="About" isActive={isActive('/about')} />
             <NavLink to="/projects" label="Projects" isActive={isActive('/projects')} />
             <NavLink to="/blog" label="Blog" isActive={isActive('/blog')} />
-            <NavLink to="/corporate-info" label="Corporate Info" isActive={isActive('/corporate-info')} />
 
-            <MenuItem label="Solutions" active={activeMenu} setActive={setActiveMenu}>
+            <MenuItem label="Company Info" active={activeMenu} setActive={setActiveMenu}>
+              <div className="dropdown-products">
+                <ProductItem Icon={Info} title="About" description="Our story, mission, and founding team." href="/about" onClick={() => setActiveMenu(null)} />
+                <ProductItem Icon={Building2} title="Corporate Info" description="Legal, statutory, and registration details." href="/corporate-info" onClick={() => setActiveMenu(null)} />
+              </div>
+            </MenuItem>
+
+            <MenuItem label="Solutions" to="/solutions" active={activeMenu} setActive={setActiveMenu}>
               <div className="dropdown-products">
                 <ProductItem Icon={Zap} title="Custom Software" description="Bespoke applications engineered for your business." href="/solutions#custom-software" onClick={() => setActiveMenu(null)} />
                 <ProductItem Icon={Brain} title="AI & Machine Learning" description="Intelligent systems that learn, adapt, and decide." href="/solutions#ai-ml" onClick={() => setActiveMenu(null)} />
@@ -212,12 +226,17 @@ export default function Navbar({ theme, toggleTheme }) {
           {/* ── CENTER: Aceternity-style menu ── */}
           <div className="nav-menu-center">
             <NavLink to="/" label="Home" isActive={isActive('/')} />
-            <NavLink to="/about" label="About" isActive={isActive('/about')} />
             <NavLink to="/projects" label="Projects" isActive={isActive('/projects')} />
             <NavLink to="/blog" label="Blog" isActive={isActive('/blog')} />
-            <NavLink to="/corporate-info" label="Corporate Info" isActive={isActive('/corporate-info')} />
 
-            <MenuItem label="Solutions" active={activeMenu} setActive={setActiveMenu}>
+            <MenuItem label="Company Info" active={activeMenu} setActive={setActiveMenu}>
+              <div className="dropdown-products">
+                <ProductItem Icon={Info} title="About" description="Our story, mission, and founding team." href="/about" onClick={() => setActiveMenu(null)} />
+                <ProductItem Icon={Building2} title="Corporate Info" description="Legal, statutory, and registration details." href="/corporate-info" onClick={() => setActiveMenu(null)} />
+              </div>
+            </MenuItem>
+
+            <MenuItem label="Solutions" to="/solutions" active={activeMenu} setActive={setActiveMenu}>
               <div className="dropdown-products">
                 <ProductItem Icon={Zap} title="Custom Software" description="Bespoke applications engineered for your business." href="/solutions#custom-software" onClick={() => setActiveMenu(null)} />
                 <ProductItem Icon={Brain} title="AI & Machine Learning" description="Intelligent systems that learn, adapt, and decide." href="/solutions#ai-ml" onClick={() => setActiveMenu(null)} />

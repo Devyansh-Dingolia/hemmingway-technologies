@@ -377,11 +377,7 @@ export default function CorporateInfo() {
                   <div className="corp-dir-resp">{category} • DIN {din}</div>
                   <div className="corp-dir-resp" style={{ opacity: 0.6, fontSize: '11px' }}>Appointed {appointedDate}</div>
                 </div>
-                <div className="corp-dir-verify">
-                  <div className="corp-dir-verify-dot" style={{ background: '#22c55e' }} />
-                  <span>Officially Appointed</span>
-                  <ShieldCheck size={13} style={{ color: '#22c55e', marginLeft: 'auto' }} />
-                </div>
+
                 <div className="corp-dir-accent-line" style={{ background: `linear-gradient(90deg, ${color1}, ${color2})` }} />
               </div>
             ))}
