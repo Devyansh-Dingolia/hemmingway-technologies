@@ -292,25 +292,7 @@ function SolutionMegaCard({ title, href, hash, Icon, accent, subsections, onClic
    Aceternity-style dropdown components
 ───────────────────────────────────────── */
 
-// HoveredLink kept for future use (currently navigation uses NavLink)
-// eslint-disable-next-line no-unused-vars
-function HoveredLink({ href, to, children }) {
-  const style = {
-    display: 'block',
-    padding: '6px 0',
-    color: 'var(--text)',
-    fontSize: '14px',
-    fontWeight: 500,
-    transition: 'color 0.2s',
-    textDecoration: 'none',
-  };
-  const onEnter = e => (e.currentTarget.style.color = 'var(--primary)');
-  const onLeave = e => (e.currentTarget.style.color = 'var(--text)');
-  if (to) return <Link to={to} style={style} onMouseEnter={onEnter} onMouseLeave={onLeave}>{children}</Link>;
-  return <a href={href} style={style} onMouseEnter={onEnter} onMouseLeave={onLeave}>{children}</a>;
-}
-
-function ProductItem({ title, description, href, Icon, onClick }) {
+function DropdownItem({ title, href, onClick }) {
   return (
     <Link
       to={href}
@@ -471,10 +453,75 @@ export default function Navbar({ theme, toggleTheme }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setActiveMenu(null); }, [location.pathname]);
 
   const isActive = p => location.pathname === p;
+
+  const closeMenu = () => setActiveMenu(null);
+
+  const solutionsSections = [
+    {
+      title: 'API & Integrations',
+      items: [
+        { title: 'REST/GraphQL API Development', href: '/solutions#api-integrations' },
+        { title: 'Third-Party & Payment Gateway Integration', href: '/solutions#api-integrations' },
+        { title: 'Webhook & Event-Driven Systems', href: '/solutions#api-integrations' },
+        { title: 'API Documentation (Swagger/OpenAPI)', href: '/solutions#api-integrations' },
+      ],
+    },
+    {
+      title: 'Mobile & Web Applications',
+      items: [
+        { title: 'Web App Development (React/Next.js)', href: '/solutions#mobile-web' },
+        { title: 'Mobile App Development (React Native)', href: '/solutions#mobile-web' },
+        { title: 'UI/UX Design & Prototyping', href: '/solutions#mobile-web' },
+        { title: 'Admin Dashboards & Panels', href: '/solutions#mobile-web' },
+      ],
+    },
+    {
+      title: 'Cybersecurity',
+      items: [
+        { title: 'Vulnerability Assessment & Pen Testing', href: '/solutions#cybersecurity' },
+        { title: 'Security Audits & Code Review', href: '/solutions#cybersecurity' },
+        { title: 'Authentication Systems (OAuth/JWT)', href: '/solutions#cybersecurity' },
+        { title: 'Compliance (DGMS/ISO 27001)', href: '/solutions#cybersecurity' },
+      ],
+    },
+    {
+      title: 'Cloud Architecture',
+      items: [
+        { title: 'Cloud Migration (AWS/GCP)', href: '/solutions#cloud' },
+        { title: 'CI/CD Pipeline Setup', href: '/solutions#cloud' },
+        { title: 'Containerization (Docker/Kubernetes)', href: '/solutions#cloud' },
+        { title: 'Cost Optimization', href: '/solutions#cloud' },
+      ],
+    },
+    {
+      title: 'AI & Machine Learning',
+      items: [
+        { title: 'LLM Integration & Agents', href: '/solutions#ai-ml' },
+        { title: 'Computer Vision Solutions', href: '/solutions#ai-ml' },
+        { title: 'Graph ML / GNN Systems', href: '/solutions#ai-ml' },
+        { title: 'MLOps & Model Deployment', href: '/solutions#ai-ml' },
+      ],
+    },
+    {
+      title: 'Custom Software Development',
+      items: [
+        { title: 'Enterprise Software Solutions', href: '/solutions#custom-software' },
+        { title: 'MVP Development', href: '/solutions#custom-software' },
+        { title: 'Legacy System Modernization', href: '/solutions#custom-software' },
+        { title: 'Technical Consulting', href: '/solutions#custom-software' },
+      ],
+    },
+  ];
+
+  const aboutItems = [
+    { title: 'Team Info', href: '/about#founders' },
+    { title: 'Corporate Info', href: '/corporate-info' },
+    { title: 'Legal', href: '/legal' },
+    { title: 'Contact Us', href: '/contact' },
+  ];
 
   return (
     <>
