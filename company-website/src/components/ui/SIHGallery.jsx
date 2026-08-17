@@ -77,6 +77,8 @@ export default function SIHGallery() {
             <img
               src={PHOTOS[current].src}
               alt={PHOTOS[current].caption}
+              loading="lazy"
+              decoding="async"
               onClick={() => setLightbox(true)}
               style={{ cursor: 'zoom-in' }}
             />
@@ -105,7 +107,7 @@ export default function SIHGallery() {
               onClick={() => goTo(i, i > current ? 'next' : 'prev')}
               aria-label={`Photo ${i + 1}`}
             >
-              <img src={p.src} alt={p.caption} />
+              <img src={p.src} alt={p.caption} loading="lazy" decoding="async" />
             </button>
           ))}
         </div>

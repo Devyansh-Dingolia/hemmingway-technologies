@@ -1,7 +1,5 @@
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { BadgeInfo, Building2, Hash, Landmark, Layers3, School2, Trophy, MapPin, Users, ArrowRight } from 'lucide-react';
-import { DIRECTORS } from '../data/companyInfo';
+import { BadgeInfo, Building2, Hash, Landmark, Layers3, School2, Trophy, MapPin, Users } from 'lucide-react';
 import { useScrollReveal, useGSAPReveal } from '../hooks/useAnimations';
 import EncryptedText from '../components/ui/EncryptedText';
 import CometCard from '../components/ui/CometCard';
@@ -57,8 +55,9 @@ export default function About() {
             Built by engineers,<br />
             <span className="gradient-text">for ambitious teams</span>
           </h1>
-          <p>
-            Two founders. One hackathon win. <br /> A company born from 36 hours of relentless building.
+          <p style={{ maxWidth: '660px', fontSize: '17px', lineHeight: '1.7' }}>
+            6 engineers. One national hackathon win. A company born from 36 hours of relentless building.
+            Winning the Smart India Hackathon grand prize gave us the conviction to create Hemmingway Technologies — a forward-thinking engineering firm dedicated to building innovative software solutions, scalable cloud architectures, and intelligent systems that solve real-world problems.
           </p>
         </div>
       </section>
