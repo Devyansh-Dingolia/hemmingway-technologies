@@ -22,6 +22,7 @@ import Terms from './pages/docs/legal/Terms';
 import CookiePolicy from './pages/docs/legal/CookiePolicy';
 import Disclaimer from './pages/docs/legal/Disclaimer';
 import CorporateInfo from './pages/CorporateInfo';
+import Founders from './pages/Founders';
 
 
 function ScrollToTop() {
@@ -53,9 +54,10 @@ function AppContent({ theme, toggleTheme }) {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/founders" element={<Founders />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/solutions" element={<Solutions />} />
-          <Route path="/team" element={<Navigate to="/projects" replace />} />
+          <Route path="/team" element={<Navigate to="/founders" replace />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contact" element={<Contact />} />

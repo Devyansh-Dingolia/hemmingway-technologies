@@ -270,14 +270,14 @@ export default function Contact() {
           <div className="contact-grid">
 
             {/* ── LEFT INFO ─────────────────────────────────────────────── */}
-            <div>
+            <div id="channels">
               <h3 className="fade-up">We'd love to hear<br />from you</h3>
               <p className="fade-up" style={{ marginTop: '16px', transitionDelay: '0.1s' }}>
                 Reach out through any of the channels below, or fill out the form and our team
                 will respond within one business day.
               </p>
 
-              <div style={{ marginTop: '48px' }}>
+              <div style={{ marginTop: '48px' }} id="location">
                 {[
                   { icon: '📍', label: 'Headquarters', value: '4th Floor, RZ F-1/380, T/F Kh No 84/15, Palam Village, New Delhi – 110045' },
                   { icon: '✉️', label: 'Email', value: 'hemmingways.tech@gmail.com' },
@@ -340,7 +340,7 @@ export default function Contact() {
             </div>
 
             {/* ── RIGHT FORM ────────────────────────────────────────────── */}
-            <div className="contact-form fade-up" style={{ transitionDelay: '0.2s' }}>
+            <div className="contact-form fade-up" id="inquiry" style={{ transitionDelay: '0.2s' }}>
 
               {/* ── SUCCESS STATE ── */}
               {status === 'success' ? (

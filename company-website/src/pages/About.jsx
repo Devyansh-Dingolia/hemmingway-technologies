@@ -1,5 +1,6 @@
 import { useRef } from 'react';
-import { BadgeInfo, Building2, Hash, Landmark, Layers3, School2, Trophy, MapPin, Users } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { BadgeInfo, Building2, Hash, Landmark, Layers3, School2, Trophy, MapPin, Users, ArrowRight } from 'lucide-react';
 import { DIRECTORS } from '../data/companyInfo';
 import { useScrollReveal, useGSAPReveal } from '../hooks/useAnimations';
 import EncryptedText from '../components/ui/EncryptedText';
@@ -23,7 +24,14 @@ const SIH_META = [
   { icon: Hash, label: 'Team ID', value: '102387' },
 ];
 
-const FOUNDERS = ['Janardhan Verma', 'Sakshi Yadav'];
+const FOUNDERS = [
+  'Sakshi',
+  'Janardhan Verma',
+  'Yash Kumar',
+  'Deepa Dingolia',
+  'Bhardwaj Kartikay',
+  'Manish Mandia',
+];
 
 export default function About() {
   useScrollReveal();
@@ -56,7 +64,7 @@ export default function About() {
       </section>
 
       {/* ── UNIFIED STORY + SIH ── */}
-      <section className="origin-section">
+      <section className="origin-section" id="origin">
         <div className="container">
           <div className="origin-grid">
 
@@ -75,7 +83,7 @@ export default function About() {
               </p>
 
               {/* SIH Detail Card */}
-              <div className="sih-card fade-up" style={{ transitionDelay: '0.2s' }}>
+              <div className="sih-card fade-up" id="sih-winner" style={{ transitionDelay: '0.2s' }}>
                 {/* Trophy Header */}
                 <div className="sih-card-header">
                   <div className="sih-trophy-wrap">
@@ -160,7 +168,7 @@ export default function About() {
       </section>
 
       {/* ── VALUES ── */}
-      <section className="about-values" ref={valuesRef}>
+      <section className="about-values" id="values" ref={valuesRef} style={{ paddingBottom: '160px' }}>
         <div className="container">
           <div className="section-header fade-up">
             <div className="tag">Our Values</div>
@@ -173,49 +181,6 @@ export default function About() {
                   <div className="value-num">{v.num}</div>
                   <h3>{v.title}</h3>
                   <p>{v.desc}</p>
-                </div>
-              </CometCard>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── FOUNDERS ── */}
-      <section className="about-values" style={{ paddingBottom: '160px' }}>
-        <div className="container">
-          <div className="section-header fade-up">
-            <div className="tag">Founders</div>
-            <h2>The people behind<br /><span className="gradient-text">Hemmingway Technologies</span></h2>
-          </div>
-          <div className="values-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', maxWidth: '700px', margin: '48px auto 0' }}>
-            {DIRECTORS.map((director) => (
-              <CometCard key={director.id} className="value-card">
-                <div data-reveal style={{ padding: '0', textAlign: 'center' }}>
-                  <div style={{
-                    width: 72, height: 72, borderRadius: '20px',
-                    background: `linear-gradient(135deg, ${director.color1}, ${director.color2})`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: '#fff', fontWeight: 700, fontSize: '22px',
-                    fontFamily: 'var(--heading)', margin: '0 auto 16px',
-                  }}>
-                    {director.initials}
-                  </div>
-                  <h3 style={{ marginBottom: '4px' }}>{director.name}</h3>
-                  <p style={{ margin: '0 0 4px', color: 'var(--primary)', fontWeight: 600, fontSize: '14px' }}>Founder & Director</p>
-                  <p style={{ margin: '0 0 8px', fontSize: '12px', fontFamily: 'var(--mono)', color: 'var(--text)' }}>DIN {director.din}</p>
-                  {director.linkedin && (
-                    <a
-                      href={director.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '13px', color: 'var(--text)', transition: 'color 0.2s' }}
-                      onMouseEnter={e => e.currentTarget.style.color = 'var(--primary)'}
-                      onMouseLeave={e => e.currentTarget.style.color = 'var(--text)'}
-                    >
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.6a1.6 1.6 0 0 0-1.6 1.6c0 .88.72 1.6 1.6 1.6a1.6 1.6 0 0 0 1.6-1.6c0-.88-.72-1.6-1.6-1.6Z"/></svg>
-                      LinkedIn
-                    </a>
-                  )}
                 </div>
               </CometCard>
             ))}

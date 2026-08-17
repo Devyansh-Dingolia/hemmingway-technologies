@@ -144,13 +144,13 @@ const DIRECTORS = [
     color1: '#6367f1', color2: '#a78bfa',
   },
   {
-    id: 'D2', initials: 'SY',
-    name: 'Sakshi Yadav',
+    id: 'D2', initials: 'S',
+    name: 'Sakshi',
     designation: 'Director',
     category: 'Promoter',
     din: '11592553',
     appointedDate: '09/03/2026',
-    color1: '#38bdf8', color2: '#34d399',
+    color1: '#ec4899', color2: '#f43f5e',
   },
 ];
 
@@ -190,7 +190,7 @@ export default function CorporateInfo() {
       </div>
 
       {/* ════════════════════════════ HERO ═══════════════════════════════════ */}
-      <section className="corp-hero">
+      <section className="corp-hero" id="governance">
         <div className="corp-hero-grid" aria-hidden="true" />
         <div className="corp-orb corp-orb-1" aria-hidden="true" />
         <div className="corp-orb corp-orb-2" aria-hidden="true" />
@@ -264,7 +264,7 @@ export default function CorporateInfo() {
       </section>
 
       {/* ════════════════════════ STATS BAR ══════════════════════════════════ */}
-      <div className="corp-stats-bar fade-up">
+      <div className="corp-stats-bar fade-up" id="compliance">
         <div className="container">
           <div className="corp-stats-inner">
             {STATS.map((s) => <StatCell key={s.label} {...s} />)}
@@ -273,7 +273,7 @@ export default function CorporateInfo() {
       </div>
 
       {/* ════════════════════════ COMPANY DETAILS ════════════════════════════ */}
-      <section className="corp-details-section">
+      <section className="corp-details-section" id="statutory">
         <div className="container">
           <div className="corp-details-header fade-up">
             <div className="corp-details-title-wrap">
@@ -349,7 +349,7 @@ export default function CorporateInfo() {
       </section>
 
       {/* ════════════════════════ DIRECTORS ══════════════════════════════════ */}
-      <section className="corp-dir-section">
+      <section className="corp-dir-section" id="directors">
         <div className="container">
           <div className="corp-details-header fade-up">
             <div className="corp-details-title-wrap">
@@ -376,11 +376,6 @@ export default function CorporateInfo() {
                   <div className="corp-dir-role" style={{ color: color1 }}>{designation}</div>
                   <div className="corp-dir-resp">{category} • DIN {din}</div>
                   <div className="corp-dir-resp" style={{ opacity: 0.6, fontSize: '11px' }}>Appointed {appointedDate}</div>
-                </div>
-                <div className="corp-dir-verify">
-                  <div className="corp-dir-verify-dot" style={{ background: '#22c55e' }} />
-                  <span>Officially Appointed</span>
-                  <ShieldCheck size={13} style={{ color: '#22c55e', marginLeft: 'auto' }} />
                 </div>
                 <div className="corp-dir-accent-line" style={{ background: `linear-gradient(90deg, ${color1}, ${color2})` }} />
               </div>

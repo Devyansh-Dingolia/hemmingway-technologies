@@ -33,7 +33,7 @@ export const BLOG_POSTS = [
       },
       {
         heading: 'Our founding team',
-        body: 'Hemmingway Technologies was founded by Janardhan Verma and Sakshi Yadav, both appointed as Directors and signatories of the company. Together, they bring complementary strengths in technology, operations, and business development — united by a shared experience of building under pressure at SIH and a belief that the best companies are built by teams that ship.',
+        body: 'Hemmingway Technologies was founded by Janardhan Verma and Sakshi, both appointed as Directors and signatories of the company. Together, they bring complementary strengths in technology, operations, and business development — united by a shared experience of building under pressure at SIH and a belief that the best companies are built by teams that ship.',
       },
       {
         heading: 'What\'s ahead',
@@ -76,7 +76,7 @@ export const BLOG_POSTS = [
     excerpt:
       'An update on our flagship project — a mine safety compliance platform developed in collaboration with CMPDI under the Ministry of Coal.',
     category: 'Project Updates',
-    author: 'Sakshi Yadav',
+    author: 'Sakshi',
     date: '2026-06-20',
     readTime: '5 min read',
     tags: ['Suraksha Sathi', 'Mine Safety', 'Gov-Tech'],
@@ -134,7 +134,7 @@ export const BLOG_POSTS = [
     excerpt:
       'India\'s mining sector is at an inflection point — legacy compliance systems are giving way to digital-first safety platforms. Here\'s what the landscape looks like and where we see it heading.',
     category: 'Industry Insights',
-    author: 'Sakshi Yadav',
+    author: 'Sakshi',
     date: '2026-05-15',
     readTime: '6 min read',
     tags: ['Mine Safety', 'India', 'Technology'],
