@@ -42,7 +42,6 @@ export default function BlogPost() {
             <h1 className="blog-post-title">{post.title}</h1>
 
             <div className="blog-meta blog-post-meta">
-              <span className="blog-author">{post.author}</span>
               <span className="blog-date">{formattedDate}</span>
               <span className="blog-read-time">{post.readTime}</span>
             </div>

@@ -37,7 +37,7 @@ export const BLOG_POSTS = [
       },
       {
         heading: 'What\'s ahead',
-        body: 'Incorporation is just the first step. We\'re actively developing our flagship project, Suraksha Sathi, continuing our collaboration with CMPDI and the Ministry of Coal, and expanding our service offerings across custom software development, AI/ML, cloud architecture, and cybersecurity. There\'s a lot of building ahead — and we couldn\'t be more ready for it.',
+        body: 'Incorporation is just the first step. Building upon our hackathon prototype, Suraksha Sathi, designed for the CMPDI problem statement under the Ministry of Coal, we are expanding our engineering offerings across custom software development, AI/ML, cloud architecture, and cybersecurity. There\'s a lot of building ahead — and we couldn\'t be more ready for it.',
       },
     ],
   },
@@ -45,7 +45,7 @@ export const BLOG_POSTS = [
     slug: 'sih-2025-national-win',
     title: 'How We Won Smart India Hackathon 2025 — And What It Taught Us',
     excerpt:
-      'Our team Vajra Dev from NSUT won the Smart India Hackathon 2025 grand prize. Here\'s the story of 36 sleepless hours, a mine safety problem, and the prototype that started a company.',
+      'Our team Vajra Dev from NSUT won the Smart India Hackathon 2025 grand prize. Here\'s the story of 36 sleepless hours, a mine safety problem statement, and the prototype that started a company.',
     category: 'Company News',
     author: 'Janardhan Verma',
     date: '2026-01-10',
@@ -54,11 +54,11 @@ export const BLOG_POSTS = [
     content: [
       {
         heading: 'The challenge',
-        body: 'Smart India Hackathon is India\'s largest open innovation platform, with over 1.5 lakh participants competing across hundreds of problem statements from government ministries and organizations. Our team — Vajra Dev, from Netaji Subhas University of Technology — was assigned problem SIH25181: build a software solution for the Ministry of Coal through CMPDI (Central Mine Planning & Design Institute) to address mine safety compliance.',
+        body: 'Smart India Hackathon is India\'s largest open innovation platform, with over 1.5 lakh participants competing across hundreds of problem statements from government ministries and organizations. Our team — Vajra Dev, from Netaji Subhas University of Technology — was assigned problem statement SIH25181: build a software solution for the Ministry of Coal through CMPDI (Central Mine Planning & Design Institute) to address mine safety compliance.',
       },
       {
         heading: '36 hours of building',
-        body: 'The hackathon format is simple but brutal: 36 continuous hours to go from problem statement to working prototype. No breaks that matter. Our team divided into workstreams — backend architecture, frontend UX, data modeling, and presentation — and shipped a production-grade app prototype that the judges could actually use. Not a pitch deck. Not a mockup. A working system.',
+        body: 'The hackathon format is simple but brutal: 36 continuous hours to go from problem statement to working prototype. No breaks that matter. Our team divided into workstreams — backend architecture, frontend UX, data modeling, and presentation — and shipped an award-winning app prototype that the judges could actually test and use. Not a pitch deck. Not a mockup. A working system.',
       },
       {
         heading: 'What the judges saw',
@@ -66,15 +66,15 @@ export const BLOG_POSTS = [
       },
       {
         heading: 'From trophy to company',
-        body: 'Winning SIH didn\'t just give us a trophy — it gave us conviction. The problem was real, the solution was needed, and we had demonstrated we could build under pressure. Three months later, Hemmingway Technologies was incorporated, and Suraksha Sathi became our flagship project. The hackathon taught us that the best companies aren\'t born from business plans — they\'re born from shipping.',
+        body: 'Winning SIH didn\'t just give us a trophy — it gave us conviction. The problem was real, the solution was needed, and we had demonstrated we could build under pressure. Three months later, Hemmingway Technologies was incorporated, inspired by our prototype Suraksha Sathi. The hackathon taught us that the best companies aren\'t born from business plans — they\'re born from shipping.',
       },
     ],
   },
   {
     slug: 'suraksha-sathi-development-update',
-    title: 'Suraksha Sathi: Building a Mine Safety Platform for India',
+    title: 'Suraksha Sathi: Building a Mine Safety Prototype for India',
     excerpt:
-      'An update on our flagship project — a mine safety compliance platform developed in collaboration with CMPDI under the Ministry of Coal.',
+      'An overview of our flagship hackathon project — a mine safety compliance prototype built to address the problem statement provided by CMPDI under the Ministry of Coal.',
     category: 'Project Updates',
     author: 'Sakshi',
     date: '2026-06-20',
@@ -83,19 +83,19 @@ export const BLOG_POSTS = [
     content: [
       {
         heading: 'The problem we\'re solving',
-        body: 'India\'s coal mining industry employs hundreds of thousands of workers, and safety compliance is a critical challenge. Regulatory frameworks exist, but the tools for tracking, enforcing, and improving compliance are often outdated or manual. Suraksha Sathi aims to bridge this gap with a modern, digital-first approach to mine safety management.',
+        body: 'India\'s coal mining industry employs hundreds of thousands of workers, and safety compliance is a critical challenge. Regulatory frameworks exist, but the tools for tracking, enforcing, and improving compliance are often outdated or manual. Suraksha Sathi was built to address this gap with a modern, digital-first approach to mine safety management.',
       },
       {
         heading: 'Our approach',
-        body: 'Rather than building a generic compliance tool and hoping it fits the mining industry, we\'ve worked closely with domain experts from CMPDI to understand actual on-ground workflows. The platform is designed around real regulatory requirements, real inspection processes, and real reporting needs — not theoretical ones.',
+        body: 'Rather than building a generic compliance tool, our prototype was specifically designed around the problem statement and regulatory requirements defined by CMPDI and the Ministry of Coal for SIH 2025. The platform maps actual inspection workflows, compliance tracking, and hazard reporting needs.',
       },
       {
         heading: 'Technology choices',
-        body: 'Suraksha Sathi is built on a modern stack — React for the frontend, a robust backend architecture, and data systems designed to handle the scale of India\'s mining operations. We\'re exploring the integration of AI/ML capabilities for predictive safety analytics, though the core platform focuses on reliability and usability above all else.',
+        body: 'Suraksha Sathi was built on a modern stack — React for the frontend, a robust backend architecture, and data systems designed to handle real-world operational scale. We explored the integration of AI/ML capabilities for predictive safety analytics, with a focus on reliability and usability above all else.',
       },
       {
         heading: 'What\'s next',
-        body: 'We\'re continuing development in close collaboration with our government partners. Our goal is to deliver a platform that genuinely improves worker safety outcomes — not just checks compliance boxes. More updates will follow as we reach key milestones.',
+        body: 'The hackathon prototype proved our ability to build high-stakes software under intense timelines. At Hemmingway Technologies, we channel that same problem-solving DNA into building production-grade enterprise software, cloud infrastructure, and AI solutions for our clients.',
       },
     ],
   },
@@ -153,7 +153,7 @@ export const BLOG_POSTS = [
       },
       {
         heading: 'Where we fit in',
-        body: 'At Hemmingway Technologies, we\'re building Suraksha Sathi with exactly this vision in mind — starting with robust compliance digitization and building toward intelligent safety analytics. The mining industry deserves the same quality of software that other sectors take for granted.',
+        body: 'Our work on the Suraksha Sathi hackathon prototype proved that modern software engineering can transform high-stakes compliance — starting with robust digitization and scaling toward predictive safety analytics. We bring that same rigor to every enterprise software system we build.',
       },
     ],
   },

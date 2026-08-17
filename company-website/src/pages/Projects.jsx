@@ -82,9 +82,9 @@ export default function Projects() {
 
               <p className="fade-up origin-lead" style={{ transitionDelay: '0.1s' }}>
                 Born from our <strong>Smart India Hackathon 2025</strong> national win,
-                Suraksha Sathi is a digital mine safety compliance and hazard monitoring platform
-                developed in collaboration with <strong>CMPDI</strong> under the <strong>Ministry of Coal</strong>.
-                The platform is designed to elevate worker safety standards, streamline statutory oversight,
+                Suraksha Sathi is a digital mine safety compliance and hazard monitoring prototype
+                built to address the problem statement provided by <strong>CMPDI</strong> under the <strong>Ministry of Coal</strong>.
+                The prototype is designed to elevate worker safety standards, streamline statutory oversight,
                 and modernize compliance verification in Indian coal mines.
               </p>
 

@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Zap, Brain, Cloud, Lock, Smartphone, Link as LinkIcon, ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useAnimations';
 import { Helmet } from 'react-helmet-async';
@@ -63,6 +64,35 @@ const SOLUTIONS = [
 
 export default function Solutions() {
   useScrollReveal();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) return;
+    const targetId = location.hash.replace('#', '');
+
+    const scrollToElement = () => {
+      const el = document.getElementById(`${targetId}-wrapper`) || document.getElementById(targetId);
+      if (el) {
+        const navHeight = 90;
+        const rect = el.getBoundingClientRect();
+        const targetTop = rect.top + window.scrollY - navHeight;
+
+        window.scrollTo({
+          top: Math.max(0, targetTop),
+          behavior: 'smooth',
+        });
+      }
+    };
+
+    // Trigger on mount or hash change with safe ticks
+    const t1 = setTimeout(scrollToElement, 80);
+    const t2 = setTimeout(scrollToElement, 350);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [location.hash]);
 
   return (
     <>

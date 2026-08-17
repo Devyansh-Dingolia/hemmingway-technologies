@@ -23,6 +23,7 @@ import CookiePolicy from './pages/docs/legal/CookiePolicy';
 import Disclaimer from './pages/docs/legal/Disclaimer';
 import CorporateInfo from './pages/CorporateInfo';
 import Founders from './pages/Founders';
+import NewsletterAnnouncement from './components/ui/NewsletterAnnouncement';
 
 
 function ScrollToTop() {
@@ -31,12 +32,15 @@ function ScrollToTop() {
     if (hash) {
       setTimeout(() => {
         const id = hash.replace('#', '');
-        const el = document.getElementById(id);
+        const el = document.getElementById(`${id}-wrapper`) || document.getElementById(id);
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
+          const navHeight = 90;
+          const rect = el.getBoundingClientRect();
+          const targetTop = rect.top + window.scrollY - navHeight;
+          window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
           return;
         }
-      }, 50);
+      }, 100);
     } else {
       window.scrollTo(0, 0);
     }
@@ -69,6 +73,7 @@ function AppContent({ theme, toggleTheme }) {
 
         </Routes>
       </main>
+      <NewsletterAnnouncement />
       <Footer />
     </>
   );

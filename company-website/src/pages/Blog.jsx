@@ -1,25 +1,14 @@
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Loader2 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useAnimations';
 import { Helmet } from 'react-helmet-async';
 import { BLOG_POSTS, CATEGORY_ICONS } from '../data/blogPosts';
-import Toast from '../components/ui/Toast';
-
-// Dev → Vite proxy forwards /api/* to http://localhost:5000
-// Prod → set VITE_API_URL to your deployed backend URL
-const API_URL = import.meta.env.VITE_API_URL
-  ? `${import.meta.env.VITE_API_URL}/api/subscribe`
-  : '/api/subscribe';
 
 const CATEGORIES = ['All', ...new Set(BLOG_POSTS.map(p => p.category))];
 
 export default function Blog() {
   const gridRef = useRef(null);
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [subscribeEmail, setSubscribeEmail] = useState('');
-  const [subscribeStatus, setSubscribeStatus] = useState('idle'); // idle | loading
-  const [toast, setToast] = useState(null);
 
   const filteredPosts = selectedCategory === 'All'
     ? BLOG_POSTS
@@ -29,105 +18,85 @@ export default function Blog() {
   // newly mounted for a different category are never observed and stay hidden.
   useScrollReveal([selectedCategory]);
 
-  const handleSubscribe = async (e) => {
-    e.preventDefault();
-    setSubscribeStatus('loading');
-    try {
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: subscribeEmail }),
-      });
-
-      let data;
-      try {
-        data = await res.json();
-      } catch {
-        throw new Error('Could not reach the server. Please try again later.');
-      }
-
-      if (res.ok && data.success) {
-        setToast({ type: 'success', title: 'Subscribed!', message: "You're on the list — we'll send new posts as they go up.", id: Math.random() });
-        setSubscribeEmail('');
-      } else if (res.status === 422 && data.errors?.email) {
-        setToast({ type: 'error', title: 'Invalid Email', message: data.errors.email, id: Math.random() });
-      } else {
-        throw new Error(data.message || 'Something went wrong. Please try again.');
-      }
-    } catch (err) {
-      const msg = err.message === 'Failed to fetch'
-        ? 'Could not reach the server. Please check your connection or try again later.'
-        : err.message;
-      setToast({ type: 'error', title: 'Subscription Failed', message: msg, id: Math.random() });
-    } finally {
-      setSubscribeStatus('idle');
-    }
-  };
-
   return (
     <>
-      {toast && (
-        <Toast
-          key={toast.id}
-          type={toast.type}
-          title={toast.title}
-          message={toast.message}
-          onClose={() => setToast(null)}
-        />
-      )}
-
       <Helmet>
-        <title>Blog | Hemmingway Technologies</title>
-
+        <title>Blog &amp; Insights | Hemmingway Technologies</title>
         <meta
           name="description"
-          content="Insights, technical articles, industry trends, and updates from Hemmingway Technologies on software engineering, artificial intelligence, cybersecurity, cloud computing, and digital innovation."
+          content="Insights on AI, system architecture, government tech, and engineering lessons from the Hemmingway Technologies team."
         />
       </Helmet>
+
+      {/* ── HERO ── */}
+      <section className="page-hero" style={{ backgroundImage: 'url("/bg-hero.webp")' }}>
+        <div className="page-hero-glow" />
+        <div className="container">
+          <div className="tag">Blog &amp; Insights</div>
+          <h1>
+            Engineering,<br />
+            <span className="gradient-text">Unfiltered.</span>
+          </h1>
+          <p style={{ maxWidth: '640px', fontSize: '16.5px', lineHeight: '1.7' }}>
+            Technical breakdowns, architectural deep dives, and practical engineering lessons from building scalable software platforms and AI solutions.
+          </p>
+        </div>
+      </section>
 
       {/* ── CATEGORY FILTER ── */}
       <section className="blog-filters">
         <div className="container">
-          <div className="filter-tabs">
-            {CATEGORIES.map(category => (
-              <button
-                key={category}
-                className={`filter-tab ${selectedCategory === category ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(category)}
-              >
-                {category}
-              </button>
-            ))}
+          <div className="category-pills">
+            {CATEGORIES.map(cat => {
+              const Icon = CATEGORY_ICONS[cat];
+              return (
+                <button
+                  key={cat}
+                  className={`category-pill ${selectedCategory === cat ? 'active' : ''}`}
+                  onClick={() => setSelectedCategory(cat)}
+                >
+                  {Icon && <Icon size={14} />}
+                  {cat}
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ── BLOG GRID ── */}
-      <section className="blog-section">
+      {/* ── POSTS GRID ── */}
+      <section className="blog-posts-section" style={{ paddingBottom: '140px' }}>
         <div className="container">
-          <div ref={gridRef} className="blog-grid">
+          <div className="blog-grid" ref={gridRef}>
             {filteredPosts.map((post, i) => {
-              const IconComponent = CATEGORY_ICONS[post.category];
+              const Icon = CATEGORY_ICONS[post.category];
               return (
                 <article key={post.slug} className="blog-card fade-up" style={{ transitionDelay: `${i * 0.08}s` }}>
-                  <div className="blog-card-header">
-                    <span className="blog-emoji"><IconComponent size={24} /></span>
-                    <span className="blog-category">{post.category}</span>
+                  <div className="blog-card-meta">
+                    <span className="blog-category">
+                      {Icon && <Icon size={12} />}
+                      {post.category}
+                    </span>
+                    <span className="blog-read-time">{post.readTime}</span>
                   </div>
-                  <h3 className="blog-title">{post.title}</h3>
-                  <p className="blog-excerpt">{post.excerpt}</p>
-                  <div className="blog-tags">
-                    {post.tags.map(tag => (
-                      <span key={tag} className="blog-tag">{tag}</span>
-                    ))}
-                  </div>
-                  <div className="blog-footer">
-                    <div className="blog-meta">
-                      <span className="blog-author">{post.author}</span>
-                      <span className="blog-date">{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-                      <span className="blog-read-time">{post.readTime}</span>
-                    </div>
-                    <Link to={`/blog/${post.slug}`} className="blog-link">Read →</Link>
+
+                  <h2 className="blog-card-title">
+                    <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                  </h2>
+
+                  <p className="blog-card-excerpt">{post.excerpt}</p>
+
+                  <div className="blog-card-footer">
+                    <span className="blog-date">
+                      {new Date(post.date).toLocaleDateString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                        year: 'numeric',
+                      })}
+                    </span>
+                    <Link to={`/blog/${post.slug}`} className="blog-read-more">
+                      Read article &rarr;
+                    </Link>
                   </div>
                 </article>
               );
@@ -138,31 +107,6 @@ export default function Blog() {
               <p>No posts in this category yet. Check back soon!</p>
             </div>
           )}
-        </div>
-      </section>
-
-      {/* ── SUBSCRIBE ── */}
-      <section className="blog-subscribe">
-        <div className="container">
-          <div className="subscribe-box">
-            <h2>Stay Updated</h2>
-            <p>Get new insights delivered to your inbox every week.</p>
-            <form className="subscribe-form" onSubmit={handleSubscribe}>
-              <input
-                type="email"
-                placeholder="your@email.com"
-                value={subscribeEmail}
-                onChange={e => setSubscribeEmail(e.target.value)}
-                disabled={subscribeStatus === 'loading'}
-                required
-              />
-              <button type="submit" className="btn btn-primary" disabled={subscribeStatus === 'loading'} style={{ justifyContent: 'center' }}>
-                {subscribeStatus === 'loading'
-                  ? <Loader2 size={16} style={{ animation: 'spin 0.9s linear infinite' }} />
-                  : 'Subscribe'}
-              </button>
-            </form>
-          </div>
         </div>
       </section>
     </>

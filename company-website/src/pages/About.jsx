@@ -76,9 +76,9 @@ export default function About() {
 
               <p className="fade-up origin-lead" style={{ transitionDelay: '0.1s' }}>
                 Team <strong>Vajra Dev</strong> from <strong>Netaji Subhas University of Technology, Delhi</strong> was assigned
-                a real government problem: build a software solution for the{' '}
-                <strong>Ministry of Coal</strong> through <strong>Central Mine Planning & Design Institute (CMPDI)</strong>.
-                We shipped a production-grade app prototype in 36 sleepless hours — and Won!
+                a real government problem statement provided by <strong>Central Mine Planning & Design Institute (CMPDI)</strong> under the{' '}
+                <strong>Ministry of Coal</strong>.
+                We built and shipped an award-winning prototype in 36 sleepless hours — and won the national grand prize!
               </p>
 
               {/* SIH Detail Card */}
