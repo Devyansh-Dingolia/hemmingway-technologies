@@ -161,6 +161,7 @@ export default function Navbar({ theme, toggleTheme }) {
             <NavLink to="/about" label="About" isActive={isActive('/about')} />
             <NavLink to="/team" label="Team" isActive={isActive('/team')} />
             <NavLink to="/blog" label="Blog" isActive={isActive('/blog')} />
+            <NavLink to="/corporate-info" label="Corporate" isActive={isActive('/corporate-info')} />
 
             <MenuItem label="Solutions" active={activeMenu} setActive={setActiveMenu}>
               <div className="dropdown-products">
@@ -209,6 +210,7 @@ export default function Navbar({ theme, toggleTheme }) {
             <NavLink to="/about" label="About" isActive={isActive('/about')} />
             <NavLink to="/team" label="Team" isActive={isActive('/team')} />
             <NavLink to="/blog" label="Blog" isActive={isActive('/blog')} />
+            <NavLink to="/corporate-info" label="Corporate" isActive={isActive('/corporate-info')} />
 
             <MenuItem label="Solutions" active={activeMenu} setActive={setActiveMenu}>
               <div className="dropdown-products">
