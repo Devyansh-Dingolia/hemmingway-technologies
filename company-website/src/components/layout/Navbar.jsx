@@ -1,47 +1,42 @@
 import { useEffect, useState, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Zap, Brain, Cloud, Lock, Moon, Sun } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 
 /* ─────────────────────────────────────────
    Aceternity-style dropdown components
 ───────────────────────────────────────── */
 
-// HoveredLink kept for future use (currently navigation uses NavLink)
-// eslint-disable-next-line no-unused-vars
-function HoveredLink({ href, to, children }) {
-  const style = {
-    display: 'block',
-    padding: '6px 0',
-    color: 'var(--text)',
-    fontSize: '14px',
-    fontWeight: 500,
-    transition: 'color 0.2s',
-    textDecoration: 'none',
-  };
-  const onEnter = e => (e.currentTarget.style.color = 'var(--primary)');
-  const onLeave = e => (e.currentTarget.style.color = 'var(--text)');
-  if (to) return <Link to={to} style={style} onMouseEnter={onEnter} onMouseLeave={onLeave}>{children}</Link>;
-  return <a href={href} style={style} onMouseEnter={onEnter} onMouseLeave={onLeave}>{children}</a>;
-}
-
-function ProductItem({ title, description, href, Icon, onClick }) {
+function DropdownItem({ title, href, onClick }) {
   return (
     <Link
       to={href}
       onClick={onClick}
-      className="product-item"
-      style={{ textDecoration: 'none', display: 'flex', gap: '12px', alignItems: 'flex-start', padding: '8px', borderRadius: '10px', transition: 'background 0.2s' }}
-      onMouseEnter={e => (e.currentTarget.style.background = 'var(--primary-light)')}
-      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+      className="dropdown-item"
+      style={{ textDecoration: 'none', display: 'block', padding: '10px 16px', borderRadius: '6px', transition: 'background 0.15s, color 0.15s' }}
+      onMouseEnter={e => {
+        e.currentTarget.style.background = 'var(--primary-light)';
+        e.currentTarget.style.color = 'var(--primary)';
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.background = 'transparent';
+        e.currentTarget.style.color = 'var(--text-bright)';
+      }}
     >
-      <div style={{ width: 40, height: 40, borderRadius: '10px', background: 'var(--primary-light)', border: '1px solid rgba(99,103,241,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, flexShrink: 0 }}>
-        <Icon size={24} />
-      </div>
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-bright)', marginBottom: 3 }}>{title}</div>
-        <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.4 }}>{description}</div>
-      </div>
+      {title}
     </Link>
+  );
+}
+
+function DropdownSection({ title, items, onClick }) {
+  return (
+    <div className="dropdown-section">
+      <div className="dropdown-section-title">{title}</div>
+      <div className="dropdown-section-items">
+        {items.map((item, i) => (
+          <DropdownItem key={i} title={item.title} href={item.href} onClick={onClick} />
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -141,10 +136,75 @@ export default function Navbar({ theme, toggleTheme }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setActiveMenu(null); }, [location.pathname]);
 
   const isActive = p => location.pathname === p;
+
+  const closeMenu = () => setActiveMenu(null);
+
+  const solutionsSections = [
+    {
+      title: 'API & Integrations',
+      items: [
+        { title: 'REST/GraphQL API Development', href: '/solutions#api-integrations' },
+        { title: 'Third-Party & Payment Gateway Integration', href: '/solutions#api-integrations' },
+        { title: 'Webhook & Event-Driven Systems', href: '/solutions#api-integrations' },
+        { title: 'API Documentation (Swagger/OpenAPI)', href: '/solutions#api-integrations' },
+      ],
+    },
+    {
+      title: 'Mobile & Web Applications',
+      items: [
+        { title: 'Web App Development (React/Next.js)', href: '/solutions#mobile-web' },
+        { title: 'Mobile App Development (React Native)', href: '/solutions#mobile-web' },
+        { title: 'UI/UX Design & Prototyping', href: '/solutions#mobile-web' },
+        { title: 'Admin Dashboards & Panels', href: '/solutions#mobile-web' },
+      ],
+    },
+    {
+      title: 'Cybersecurity',
+      items: [
+        { title: 'Vulnerability Assessment & Pen Testing', href: '/solutions#cybersecurity' },
+        { title: 'Security Audits & Code Review', href: '/solutions#cybersecurity' },
+        { title: 'Authentication Systems (OAuth/JWT)', href: '/solutions#cybersecurity' },
+        { title: 'Compliance (DGMS/ISO 27001)', href: '/solutions#cybersecurity' },
+      ],
+    },
+    {
+      title: 'Cloud Architecture',
+      items: [
+        { title: 'Cloud Migration (AWS/GCP)', href: '/solutions#cloud' },
+        { title: 'CI/CD Pipeline Setup', href: '/solutions#cloud' },
+        { title: 'Containerization (Docker/Kubernetes)', href: '/solutions#cloud' },
+        { title: 'Cost Optimization', href: '/solutions#cloud' },
+      ],
+    },
+    {
+      title: 'AI & Machine Learning',
+      items: [
+        { title: 'LLM Integration & Agents', href: '/solutions#ai-ml' },
+        { title: 'Computer Vision Solutions', href: '/solutions#ai-ml' },
+        { title: 'Graph ML / GNN Systems', href: '/solutions#ai-ml' },
+        { title: 'MLOps & Model Deployment', href: '/solutions#ai-ml' },
+      ],
+    },
+    {
+      title: 'Custom Software Development',
+      items: [
+        { title: 'Enterprise Software Solutions', href: '/solutions#custom-software' },
+        { title: 'MVP Development', href: '/solutions#custom-software' },
+        { title: 'Legacy System Modernization', href: '/solutions#custom-software' },
+        { title: 'Technical Consulting', href: '/solutions#custom-software' },
+      ],
+    },
+  ];
+
+  const aboutItems = [
+    { title: 'Team Info', href: '/about#founders' },
+    { title: 'Corporate Info', href: '/corporate-info' },
+    { title: 'Legal', href: '/legal' },
+    { title: 'Contact Us', href: '/contact' },
+  ];
 
   return (
     <>
@@ -168,12 +228,23 @@ export default function Navbar({ theme, toggleTheme }) {
             <NavLink to="/blog" label="Blog" isActive={isActive('/blog')} />
             <NavLink to="/corporate-info" label="Corporate Info" isActive={isActive('/corporate-info')} />
 
+            <MenuItem label="About" active={activeMenu} setActive={setActiveMenu}>
+              <div className="dropdown-about">
+                <div className="dropdown-section">
+                  <div className="dropdown-section-items">
+                    {aboutItems.map((item, i) => (
+                      <DropdownItem key={i} title={item.title} href={item.href} onClick={closeMenu} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </MenuItem>
+
             <MenuItem label="Solutions" active={activeMenu} setActive={setActiveMenu}>
-              <div className="dropdown-products">
-                <ProductItem Icon={Zap} title="Custom Software" description="Bespoke applications engineered for your business." href="/solutions#custom-software" onClick={() => setActiveMenu(null)} />
-                <ProductItem Icon={Brain} title="AI & Machine Learning" description="Intelligent systems that learn, adapt, and decide." href="/solutions#ai-ml" onClick={() => setActiveMenu(null)} />
-                <ProductItem Icon={Cloud} title="Cloud Architecture" description="Scalable, resilient infrastructure at enterprise scale." href="/solutions#cloud" onClick={() => setActiveMenu(null)} />
-                <ProductItem Icon={Lock} title="Cybersecurity" description="Enterprise-grade security across your stack." href="/solutions#cybersecurity" onClick={() => setActiveMenu(null)} />
+              <div className="dropdown-solutions">
+                {solutionsSections.map((section, i) => (
+                  <DropdownSection key={i} title={section.title} items={section.items} onClick={closeMenu} />
+                ))}
               </div>
             </MenuItem>
           </div>
@@ -217,12 +288,23 @@ export default function Navbar({ theme, toggleTheme }) {
             <NavLink to="/blog" label="Blog" isActive={isActive('/blog')} />
             <NavLink to="/corporate-info" label="Corporate Info" isActive={isActive('/corporate-info')} />
 
+            <MenuItem label="About" active={activeMenu} setActive={setActiveMenu}>
+              <div className="dropdown-about">
+                <div className="dropdown-section">
+                  <div className="dropdown-section-items">
+                    {aboutItems.map((item, i) => (
+                      <DropdownItem key={i} title={item.title} href={item.href} onClick={closeMenu} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </MenuItem>
+
             <MenuItem label="Solutions" active={activeMenu} setActive={setActiveMenu}>
-              <div className="dropdown-products">
-                <ProductItem Icon={Zap} title="Custom Software" description="Bespoke applications engineered for your business." href="/solutions#custom-software" onClick={() => setActiveMenu(null)} />
-                <ProductItem Icon={Brain} title="AI & Machine Learning" description="Intelligent systems that learn, adapt, and decide." href="/solutions#ai-ml" onClick={() => setActiveMenu(null)} />
-                <ProductItem Icon={Cloud} title="Cloud Architecture" description="Scalable, resilient infrastructure at enterprise scale." href="/solutions#cloud" onClick={() => setActiveMenu(null)} />
-                <ProductItem Icon={Lock} title="Cybersecurity" description="Enterprise-grade security across your stack." href="/solutions#cybersecurity" onClick={() => setActiveMenu(null)} />
+              <div className="dropdown-solutions">
+                {solutionsSections.map((section, i) => (
+                  <DropdownSection key={i} title={section.title} items={section.items} onClick={closeMenu} />
+                ))}
               </div>
             </MenuItem>
           </div>
