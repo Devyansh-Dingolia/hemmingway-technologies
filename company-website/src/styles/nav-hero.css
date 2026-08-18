@@ -46,8 +46,8 @@
 
 [data-theme="light"] .menu-dropdown-inner {
   background: rgba(255, 255, 255, 1) !important;
-  border-color: rgba(99, 103, 241, 0.25) !important;
-  box-shadow: 0 8px 32px rgba(99, 103, 241, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.4) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: none !important;
 }
 
 [data-theme="light"] .menu-dropdown-inner::before {
@@ -254,11 +254,11 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-  background: rgba(8, 8, 20, 1);
-  border: 1px solid rgba(99, 103, 241, 0.35);
+  background: rgba(8, 8, 20, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   padding: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.08);
+  box-shadow: none;
   animation: slideInDropdown 0.3s ease forwards;
 }
 
@@ -342,12 +342,12 @@
 .solution-mega-card:hover {
   background: rgba(255, 255, 255, 0.04);
   border-color: rgba(99, 103, 241, 0.3);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: none;
   transform: translateY(-2px);
 }
 
 .solution-mega-card:hover::before {
-  opacity: 1;
+  opacity: 0;
 }
 
 .solution-mega-header {
@@ -367,7 +367,7 @@
   justify-content: center;
   border: 1px solid;
   flex-shrink: 0;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.25s ease;
 }
 
 .solution-mega-card:hover .solution-mega-icon {
@@ -446,7 +446,7 @@
 .solution-sub-link:hover .solution-sub-dot {
   opacity: 1;
   transform: scale(1.4);
-  box-shadow: 0 0 8px var(--dot-accent, var(--primary));
+  box-shadow: none;
 }
 
 .solution-sub-link:hover .solution-sub-text {
@@ -503,7 +503,7 @@
 [data-theme="light"] .solution-mega-card:hover {
   background: rgba(255, 255, 255, 0.95);
   border-color: rgba(99, 103, 241, 0.25);
-  box-shadow: 0 8px 24px rgba(99, 103, 241, 0.08);
+  box-shadow: none;
 }
 
 [data-theme="light"] .solution-sub-link:hover {

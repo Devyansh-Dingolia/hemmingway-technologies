@@ -301,18 +301,25 @@ function MenuItem({ label, children, active, setActive, isRouteActive }) {
     <div
       className="menu-item-wrap"
       onMouseEnter={() => {
-        setHovered(true);
-        setActive(label);
+        if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
+          setHovered(true);
+          setActive(label);
+        }
       }}
       onMouseLeave={() => {
-        setHovered(false);
-        setActive(null);
+        if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
+          setHovered(false);
+          setActive(null);
+        }
       }}
     >
       <button
         type="button"
         className={`menu-item-btn${isOpen ? ' open' : ''}${isRouteActive ? ' active' : ''}`}
-        onClick={() => setActive(isOpen ? null : label)}
+        onClick={(e) => {
+          e.stopPropagation();
+          setActive(isOpen ? null : label);
+        }}
         aria-expanded={isOpen}
       >
         {display}
@@ -414,6 +421,12 @@ export default function Navbar({ theme, toggleTheme }) {
   const [scrolled, setScrolled] = useState(false);
   const [activeMenu, setActiveMenu] = useState(null);
   const location = useLocation();
+  const [prevPath, setPrevPath] = useState(location.pathname);
+
+  if (prevPath !== location.pathname) {
+    setPrevPath(location.pathname);
+    setActiveMenu(null);
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -421,11 +434,25 @@ export default function Navbar({ theme, toggleTheme }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (!e.target.closest('.navbar')) {
+        setActiveMenu(null);
+      }
+    };
+    document.addEventListener('click', handleOutsideClick);
+    return () => document.removeEventListener('click', handleOutsideClick);
+  }, []);
+
   const isActive = p => location.pathname === p;
 
   return (
     <>
-      <nav className={`navbar${scrolled ? ' scrolled' : ''}`} onMouseLeave={() => setActiveMenu(null)}>
+      <nav className={`navbar${scrolled ? ' scrolled' : ''}`} onMouseLeave={() => {
+        if (typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches) {
+          setActiveMenu(null);
+        }
+      }}>
         <div className="nav-inner">
 
           {/* ── LOGO: leaf icon + brand text ── */}
