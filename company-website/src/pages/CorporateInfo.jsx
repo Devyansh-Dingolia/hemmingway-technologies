@@ -16,6 +16,7 @@ import {
 import { useScrollReveal } from '../hooks/useAnimations';
 import { Helmet } from 'react-helmet-async';
 import Aurora from '../components/ui/Aurora';
+import '../styles/pages.css';
 
 /* ── Animated counter hook ─────────────────────────── */
 function useCounter(target, duration = 1800) {

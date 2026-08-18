@@ -14,6 +14,7 @@ import { useScrollReveal, useGSAPReveal } from '../hooks/useAnimations';
 import { Helmet } from 'react-helmet-async';
 import CometCard from '../components/ui/CometCard';
 import EncryptedText from '../components/ui/EncryptedText';
+import '../styles/pages.css';
 
 const CAPABILITIES = [
   {

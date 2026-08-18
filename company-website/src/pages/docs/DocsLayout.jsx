@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import {
   Shield, FileText, Cookie, AlertTriangle, ChevronRight,
 } from 'lucide-react';
+import '../../styles/pages.css';
 
 const LEGAL_DOCS = [
   { to: '/docs/legal/privacy-policy', label: 'Privacy Policy',   Icon: Shield },

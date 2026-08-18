@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-route
 import './index.css';
 import './styles/nav-hero.css';
 import './styles/sections.css';
-import './styles/pages.css';
 import './styles/responsive.css';
 
 import Navbar from './components/layout/Navbar';
@@ -51,6 +50,26 @@ function PageFallback() {
   return <div style={{ minHeight: '80vh', background: 'var(--bg)' }} aria-hidden="true" />;
 }
 
+function DeferredNewsletter() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      const id = window.requestIdleCallback(() => setShow(true), { timeout: 3000 });
+      return () => window.cancelIdleCallback(id);
+    } else {
+      const timer = setTimeout(() => setShow(true), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  if (!show) return null;
+  return (
+    <Suspense fallback={null}>
+      <NewsletterAnnouncement />
+    </Suspense>
+  );
+}
+
 function AppContent({ theme, toggleTheme }) {
   return (
     <>
@@ -77,9 +96,7 @@ function AppContent({ theme, toggleTheme }) {
           </Routes>
         </Suspense>
       </main>
-      <Suspense fallback={null}>
-        <NewsletterAnnouncement />
-      </Suspense>
+      <DeferredNewsletter />
       <Footer />
     </>
   );

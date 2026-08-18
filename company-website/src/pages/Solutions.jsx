@@ -4,6 +4,7 @@ import { Zap, Brain, Cloud, Lock, Smartphone, Link as LinkIcon, ArrowRight, Chec
 import { useScrollReveal } from '../hooks/useAnimations';
 import { Helmet } from 'react-helmet-async';
 import ScrollStack, { ScrollStackItem } from '../components/ui/ScrollStack';
+import '../styles/pages.css';
 
 const SOLUTIONS = [
   {

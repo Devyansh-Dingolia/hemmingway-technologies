@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { ArrowLeft } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useAnimations';
 import { BLOG_POSTS, CATEGORY_ICONS, getPostBySlug } from '../data/blogPosts';
+import '../styles/pages.css';
 
 export default function BlogPost() {
   useScrollReveal();

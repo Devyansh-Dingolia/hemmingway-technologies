@@ -1014,13 +1014,13 @@
   background-image: url('/bg-hero.webp');
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 @media (max-width: 768px) {
   .hero-bg {
     background-image: url('/bg-hero-phones.webp');
-    background-attachment: scroll;
   }
 }
 

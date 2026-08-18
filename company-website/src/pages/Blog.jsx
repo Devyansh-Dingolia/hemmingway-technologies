@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useScrollReveal } from '../hooks/useAnimations';
 import { Helmet } from 'react-helmet-async';
 import { BLOG_POSTS, CATEGORY_ICONS } from '../data/blogPosts';
+import '../styles/pages.css';
 
 const CATEGORIES = ['All', ...new Set(BLOG_POSTS.map(p => p.category))];
 

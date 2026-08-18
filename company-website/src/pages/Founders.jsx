@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Users, Award, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useAnimations';
 import { FOUNDERS } from '../data/companyInfo';
+import '../styles/pages.css';
 
 export default function Founders() {
   useScrollReveal();

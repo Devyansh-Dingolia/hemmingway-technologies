@@ -5,6 +5,7 @@ import EncryptedText from '../components/ui/EncryptedText';
 import CometCard from '../components/ui/CometCard';
 import SIHGallery from '../components/ui/SIHGallery';
 import { Helmet } from 'react-helmet-async';
+import '../styles/pages.css';
 
 const VALUES = [
   { num: '01', title: 'Craft Over Speed', desc: 'We take pride in the quality of every line of code, every pixel, every decision. Shortcuts are not in our vocabulary.' },

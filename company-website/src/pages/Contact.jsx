@@ -3,6 +3,7 @@ import { CheckCircle, ChevronDown, Check, AlertCircle, Loader2, XCircle } from '
 import { useScrollReveal } from '../hooks/useAnimations';
 import { Helmet } from 'react-helmet-async';
 import Toast from '../components/ui/Toast';
+import '../styles/pages.css';
 
 // ── API endpoint ───────────────────────────────────────────────────────────────
 // Dev  → Vite proxy forwards /api/* to http://localhost:5000
