@@ -1,11 +1,45 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect, lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { Zap, Brain, Cloud, Lock, Smartphone, Link as LinkIcon, BarChart3, Bot, Globe } from 'lucide-react';
 import { useScrollReveal, useGSAPReveal } from '../hooks/useAnimations';
 import { Helmet } from "react-helmet-async";
 import EncryptedText from '../components/ui/EncryptedText';
 import CometCard from '../components/ui/CometCard';
-import Antigravity from '../components/ui/Antigravity';
+
+const Antigravity = lazy(() => import('../components/ui/Antigravity'));
+
+function LazyAntigravity(props) {
+  const [shouldLoad, setShouldLoad] = useState(false);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoad(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '300px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="cta-antigravity-bg">
+      {shouldLoad && (
+        <Suspense fallback={null}>
+          <Antigravity {...props} />
+        </Suspense>
+      )}
+    </div>
+  );
+}
 
 const SERVICES = [
   { Icon: Zap, title: 'Custom Software', desc: 'Bespoke applications engineered for your unique business challenges, built to scale from day one.' },
@@ -181,21 +215,19 @@ export default function Home() {
 
       {/* ── CTA ── */}
       <section className="cta-section">
-        <div className="cta-antigravity-bg">
-          <Antigravity
-            count={250}
-            magnetRadius={8}
-            ringRadius={8}
-            waveSpeed={0.4}
-            waveAmplitude={1}
-            particleSize={1.4}
-            lerpSpeed={0.05}
-            color={'#6367F1'}
-            autoAnimate={true}
-            particleVariance={1}
-            fieldStrength={1}
-          />
-        </div>
+        <LazyAntigravity
+          count={180}
+          magnetRadius={8}
+          ringRadius={8}
+          waveSpeed={0.4}
+          waveAmplitude={1}
+          particleSize={1.4}
+          lerpSpeed={0.05}
+          color={'#6367F1'}
+          autoAnimate={true}
+          particleVariance={1}
+          fieldStrength={1}
+        />
         <div className="container">
           <div className="cta-inner fade-up">
             <div className="tag" style={{ margin: '0 auto 24px' }}>Ready to Build?</div>

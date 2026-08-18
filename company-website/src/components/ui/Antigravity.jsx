@@ -4,21 +4,21 @@ import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 
 const AntigravityInner = ({
-  count = 700,
-  magnetRadius = 20,
-  ringRadius = 50,
+  count = 200,
+  magnetRadius = 15,
+  ringRadius = 30,
   waveSpeed = 0.4,
   waveAmplitude = 1,
-  particleSize = 2,
-  lerpSpeed = 0.1,
-  color = '#FF9FFC',
-  autoAnimate = false,
+  particleSize = 1.5,
+  lerpSpeed = 0.08,
+  color = '#6367F1',
+  autoAnimate = true,
   particleVariance = 1,
   rotationSpeed = 0,
   depthFactor = 1,
   pulseSpeed = 3,
   particleShape = 'capsule',
-  fieldStrength = 10
+  fieldStrength = 5
 }) => {
   const meshRef = useRef(null);
   const { viewport } = useThree();
@@ -28,12 +28,20 @@ const AntigravityInner = ({
   const lastMouseMoveTime = useRef(0);
   const virtualMouse = useRef({ x: 0, y: 0 });
 
+  const effectiveCount = useMemo(() => {
+    // Reduce particle count on smaller screens or default to max 180 for 60fps budget
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      return Math.min(count, 80);
+    }
+    return Math.min(count, 180);
+  }, [count]);
+
   const particles = useMemo(() => {
     const temp = [];
     const width = viewport.width || 100;
     const height = viewport.height || 100;
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < effectiveCount; i++) {
       const t = Math.random() * 100;
       const factor = 20 + Math.random() * 100;
       const speed = 0.01 + Math.random() / 200;
@@ -67,9 +75,11 @@ const AntigravityInner = ({
       });
     }
     return temp;
-  }, [count, viewport.width, viewport.height]);
+  }, [effectiveCount, viewport.width, viewport.height]);
 
   useFrame(state => {
+    if (typeof document !== 'undefined' && document.hidden) return;
+
     const mesh = meshRef.current;
     if (!mesh) return;
 
@@ -159,7 +169,7 @@ const AntigravityInner = ({
   });
 
   return (
-    <instancedMesh ref={meshRef} args={[undefined, undefined, count]}>
+    <instancedMesh ref={meshRef} args={[undefined, undefined, effectiveCount]}>
       {particleShape === 'capsule' && <capsuleGeometry args={[0.1, 0.4, 4, 8]} />}
       {particleShape === 'sphere' && <sphereGeometry args={[0.2, 16, 16]} />}
       {particleShape === 'box' && <boxGeometry args={[0.3, 0.3, 0.3]} />}
@@ -171,7 +181,12 @@ const AntigravityInner = ({
 
 const Antigravity = props => {
   return (
-    <Canvas camera={{ position: [0, 0, 50], fov: 35 }} gl={{ alpha: true }} style={{ background: 'transparent' }}>
+    <Canvas
+      camera={{ position: [0, 0, 50], fov: 35 }}
+      gl={{ alpha: true, antialias: false, powerPreference: 'high-performance' }}
+      dpr={[1, 1.5]}
+      style={{ background: 'transparent' }}
+    >
       <AntigravityInner {...props} />
     </Canvas>
   );

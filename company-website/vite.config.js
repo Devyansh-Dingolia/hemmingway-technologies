@@ -5,6 +5,39 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   assetsInclude: ['**/*.glb'],
+  build: {
+    target: 'es2020',
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules/three') || id.includes('node_modules/@react-three')) {
+            return 'vendor-three';
+          }
+          if (id.includes('node_modules/ogl')) {
+            return 'vendor-ogl';
+          }
+          if (id.includes('node_modules/gsap') || id.includes('node_modules/@gsap')) {
+            return 'vendor-gsap';
+          }
+          if (id.includes('node_modules/lenis') || id.includes('node_modules/motion')) {
+            return 'vendor-motion';
+          }
+          if (id.includes('node_modules/lucide-react')) {
+            return 'vendor-icons';
+          }
+          if (
+            id.includes('node_modules/react/') ||
+            id.includes('node_modules/react-dom/') ||
+            id.includes('node_modules/react-router') ||
+            id.includes('node_modules/react-helmet-async')
+          ) {
+            return 'vendor-react';
+          }
+        },
+      },
+    },
+  },
 
   // ── Dev proxy ──────────────────────────────────────────────────────────────
   // In development, Vite forwards /api/* requests to the local mailer backend

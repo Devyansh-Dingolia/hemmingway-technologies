@@ -55,7 +55,7 @@ export default function Footer() {
         {/* LEFT: brand + tagline + statutory info */}
         <div className="ftr-brand">
           <div className="ftr-brand-id">
-            <img src="/logo-icon.webp" alt="Hemmingway" className="ftr-brand-icon" />
+            <img src="/logo-icon.webp" alt="Hemmingway" width={32} height={32} className="ftr-brand-icon" />
             <span className="ftr-brand-name">Hemmingway Technologies</span>
           </div>
 

@@ -39,38 +39,63 @@ export function useParallax(ref, speed = 0.3) {
   }, [ref, speed]);
 }
 
-// useGSAPReveal — stagger animation using GSAP (re-runs when dependencies change)
+// useGSAPReveal — stagger animation using GSAP triggered only when in viewport
 export function useGSAPReveal(containerRef, dependencies = []) {
   useEffect(() => {
-    const animateItems = async () => {
-      const { gsap: gsapModule } = await import('gsap');
-      const gsap = gsapModule.default || gsapModule;
-      
-      if (!containerRef.current) return;
-      const items = containerRef.current.querySelectorAll('[data-reveal]');
-      if (!items.length) return;
-      
-      // Wait for next frame to ensure DOM is fully updated
-      return new Promise(resolve => {
-        requestAnimationFrame(() => {
-          // Reset all items to initial state
-          gsap.set(items, { y: 50, opacity: 0 });
-          
-          // Animate them in on the next frame
-          requestAnimationFrame(() => {
-            gsap.to(items, {
-              y: 0,
-              opacity: 1,
-              duration: 0.9,
-              stagger: 0.12,
-              ease: 'power3.out',
-              onComplete: resolve,
-            });
-          });
-        });
+    const el = containerRef.current;
+    if (!el) return;
+
+    // Check reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const items = el.querySelectorAll('[data-reveal]');
+      items.forEach(item => {
+        item.style.opacity = '1';
+        item.style.transform = 'none';
       });
-    };
-    
-    animateItems();
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      async (entries) => {
+        const [entry] = entries;
+        if (entry.isIntersecting) {
+          observer.disconnect();
+
+          const items = el.querySelectorAll('[data-reveal]');
+          if (!items.length) return;
+
+          try {
+            const { gsap: gsapModule } = await import('gsap');
+            const gsap = gsapModule.default || gsapModule;
+
+            if (!containerRef.current) return;
+
+            gsap.fromTo(
+              items,
+              { y: 35, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'power3.out',
+                clearProps: 'transform,opacity',
+              }
+            );
+          } catch {
+            // Fallback if dynamic import fails
+            items.forEach(item => {
+              item.style.opacity = '1';
+              item.style.transform = 'none';
+            });
+          }
+        }
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerRef, ...dependencies]);
 }

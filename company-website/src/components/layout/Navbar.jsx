@@ -292,49 +292,6 @@ function SolutionMegaCard({ title, href, hash, Icon, accent, subsections, onClic
    Aceternity-style dropdown components
 ───────────────────────────────────────── */
 
-function DropdownItem({ title, href, onClick }) {
-  return (
-    <Link
-      to={href}
-      onClick={onClick}
-      className="product-item"
-      style={{
-        textDecoration: 'none',
-        display: 'flex',
-        gap: '12px',
-        alignItems: 'flex-start',
-        padding: '8px 10px',
-        borderRadius: '10px',
-        transition: 'background 0.2s',
-      }}
-      onMouseEnter={e => (e.currentTarget.style.background = 'var(--primary-light)')}
-      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-    >
-      <div
-        style={{
-          width: 38,
-          height: 38,
-          borderRadius: '10px',
-          background: 'var(--primary-light)',
-          border: '1px solid rgba(99,103,241,0.25)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: 'var(--primary)',
-          fontSize: 20,
-          flexShrink: 0,
-        }}
-      >
-        <Icon size={20} />
-      </div>
-      <div>
-        <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-bright)', marginBottom: 2 }}>{title}</div>
-        <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.35 }}>{description}</div>
-      </div>
-    </Link>
-  );
-}
-
 function MenuItem({ label, children, active, setActive, isRouteActive }) {
   const isOpen = active === label;
   const [hovered, setHovered] = useState(false);
@@ -392,21 +349,32 @@ function useEncrypt(text, active) {
   const [display, setDisplay] = useState(text);
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   const raf = useRef(null);
+
   useEffect(() => {
-    if (!active) {
-      const t = setTimeout(() => setDisplay(text), 0);
-      return () => clearTimeout(t);
-    }
+    if (!active) return;
+
     let iter = 0;
     const step = () => {
-      setDisplay(text.split('').map((c, i) => c === ' ' ? ' ' : i < iter ? text[i] : chars[Math.floor(Math.random() * chars.length)]).join(''));
-      if (iter < text.length) { iter += 0.7; raf.current = requestAnimationFrame(step); }
-      else setDisplay(text);
+      setDisplay(
+        text
+          .split('')
+          .map((c, i) => (c === ' ' ? ' ' : i < iter ? text[i] : chars[Math.floor(Math.random() * chars.length)]))
+          .join('')
+      );
+      if (iter < text.length) {
+        iter += 0.8;
+        raf.current = requestAnimationFrame(step);
+      } else {
+        setDisplay(text);
+      }
     };
     raf.current = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(raf.current);
+    return () => {
+      if (raf.current) cancelAnimationFrame(raf.current);
+    };
   }, [active, text]);
-  return display;
+
+  return active ? display : text;
 }
 
 function NavLink({ to, label, isActive, onClick }) {
@@ -449,79 +417,11 @@ export default function Navbar({ theme, toggleTheme }) {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => { setActiveMenu(null); }, [location.pathname]);
-
   const isActive = p => location.pathname === p;
-
-  const closeMenu = () => setActiveMenu(null);
-
-  const solutionsSections = [
-    {
-      title: 'API & Integrations',
-      items: [
-        { title: 'REST/GraphQL API Development', href: '/solutions#api-integrations' },
-        { title: 'Third-Party & Payment Gateway Integration', href: '/solutions#api-integrations' },
-        { title: 'Webhook & Event-Driven Systems', href: '/solutions#api-integrations' },
-        { title: 'API Documentation (Swagger/OpenAPI)', href: '/solutions#api-integrations' },
-      ],
-    },
-    {
-      title: 'Mobile & Web Applications',
-      items: [
-        { title: 'Web App Development (React/Next.js)', href: '/solutions#mobile-web' },
-        { title: 'Mobile App Development (React Native)', href: '/solutions#mobile-web' },
-        { title: 'UI/UX Design & Prototyping', href: '/solutions#mobile-web' },
-        { title: 'Admin Dashboards & Panels', href: '/solutions#mobile-web' },
-      ],
-    },
-    {
-      title: 'Cybersecurity',
-      items: [
-        { title: 'Vulnerability Assessment & Pen Testing', href: '/solutions#cybersecurity' },
-        { title: 'Security Audits & Code Review', href: '/solutions#cybersecurity' },
-        { title: 'Authentication Systems (OAuth/JWT)', href: '/solutions#cybersecurity' },
-        { title: 'Compliance (DGMS/ISO 27001)', href: '/solutions#cybersecurity' },
-      ],
-    },
-    {
-      title: 'Cloud Architecture',
-      items: [
-        { title: 'Cloud Migration (AWS/GCP)', href: '/solutions#cloud' },
-        { title: 'CI/CD Pipeline Setup', href: '/solutions#cloud' },
-        { title: 'Containerization (Docker/Kubernetes)', href: '/solutions#cloud' },
-        { title: 'Cost Optimization', href: '/solutions#cloud' },
-      ],
-    },
-    {
-      title: 'AI & Machine Learning',
-      items: [
-        { title: 'LLM Integration & Agents', href: '/solutions#ai-ml' },
-        { title: 'Computer Vision Solutions', href: '/solutions#ai-ml' },
-        { title: 'Graph ML / GNN Systems', href: '/solutions#ai-ml' },
-        { title: 'MLOps & Model Deployment', href: '/solutions#ai-ml' },
-      ],
-    },
-    {
-      title: 'Custom Software Development',
-      items: [
-        { title: 'Enterprise Software Solutions', href: '/solutions#custom-software' },
-        { title: 'MVP Development', href: '/solutions#custom-software' },
-        { title: 'Legacy System Modernization', href: '/solutions#custom-software' },
-        { title: 'Technical Consulting', href: '/solutions#custom-software' },
-      ],
-    },
-  ];
-
-  const aboutItems = [
-    { title: 'Team Info', href: '/about#founders' },
-    { title: 'Corporate Info', href: '/corporate-info' },
-    { title: 'Legal', href: '/legal' },
-    { title: 'Contact Us', href: '/contact' },
-  ];
 
   return (
     <>
@@ -530,7 +430,7 @@ export default function Navbar({ theme, toggleTheme }) {
 
           {/* ── LOGO: leaf icon + brand text ── */}
           <Link to="/" className="nav-logo">
-            <img src="/logo-icon.webp" alt="" className="nav-logo-icon" />
+            <img src="/logo-icon.webp" alt="Hemmingway logo" width={32} height={32} className="nav-logo-icon" />
             <div className="nav-logo-text">
               <span className="nav-logo-name">Hemmingway</span>
               <span className="nav-logo-sub">Technologies</span>
@@ -627,7 +527,7 @@ export default function Navbar({ theme, toggleTheme }) {
           <div className="logo">
             {/* ── LOGO: leaf icon + brand text ── */}
             <Link to="/" className="nav-logo">
-              <img src="/logo-icon.webp" alt="" className="nav-logo-icon" />
+              <img src="/logo-icon.webp" alt="Hemmingway logo" width={32} height={32} className="nav-logo-icon" />
               <div className="nav-logo-text">
                 <span className="nav-logo-name">Hemmingway</span>
                 <span className="nav-logo-sub">Technologies</span>

@@ -1,30 +1,29 @@
-import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { useState, useEffect, lazy, Suspense } from 'react';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import './index.css';
 import './styles/nav-hero.css';
 import './styles/sections.css';
 import './styles/pages.css';
 import './styles/responsive.css';
 
-import Loader from './components/ui/Loader';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Home from './pages/Home';
-import About from './pages/About';
-import Contact from './pages/Contact';
-import Projects from './pages/Projects';
-import Solutions from './pages/Solutions';
-import { Navigate } from 'react-router-dom';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import PrivacyPolicy from './pages/docs/legal/PrivacyPolicy';
-import Terms from './pages/docs/legal/Terms';
-import CookiePolicy from './pages/docs/legal/CookiePolicy';
-import Disclaimer from './pages/docs/legal/Disclaimer';
-import CorporateInfo from './pages/CorporateInfo';
-import Founders from './pages/Founders';
-import NewsletterAnnouncement from './components/ui/NewsletterAnnouncement';
 
+// Code-split other routes
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Projects = lazy(() => import('./pages/Projects'));
+const Solutions = lazy(() => import('./pages/Solutions'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const PrivacyPolicy = lazy(() => import('./pages/docs/legal/PrivacyPolicy'));
+const Terms = lazy(() => import('./pages/docs/legal/Terms'));
+const CookiePolicy = lazy(() => import('./pages/docs/legal/CookiePolicy'));
+const Disclaimer = lazy(() => import('./pages/docs/legal/Disclaimer'));
+const CorporateInfo = lazy(() => import('./pages/CorporateInfo'));
+const Founders = lazy(() => import('./pages/Founders'));
+const NewsletterAnnouncement = lazy(() => import('./components/ui/NewsletterAnnouncement'));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -48,6 +47,10 @@ function ScrollToTop() {
   return null;
 }
 
+function PageFallback() {
+  return <div style={{ minHeight: '80vh', background: 'var(--bg)' }} aria-hidden="true" />;
+}
+
 function AppContent({ theme, toggleTheme }) {
   return (
     <>
@@ -55,44 +58,40 @@ function AppContent({ theme, toggleTheme }) {
       <ScrollToTop />
       <Navbar theme={theme} toggleTheme={toggleTheme} />
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/founders" element={<Founders />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/solutions" element={<Solutions />} />
-          <Route path="/team" element={<Navigate to="/founders" replace />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:slug" element={<BlogPost />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/docs/legal/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/docs/legal/terms" element={<Terms />} />
-          <Route path="/docs/legal/cookie-policy" element={<CookiePolicy />} />
-          <Route path="/docs/legal/disclaimer" element={<Disclaimer />} />
-          <Route path="/corporate-info" element={<CorporateInfo />} />
-
-        </Routes>
+        <Suspense fallback={<PageFallback />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/founders" element={<Founders />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/solutions" element={<Solutions />} />
+            <Route path="/team" element={<Navigate to="/founders" replace />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/docs/legal/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/docs/legal/terms" element={<Terms />} />
+            <Route path="/docs/legal/cookie-policy" element={<CookiePolicy />} />
+            <Route path="/docs/legal/disclaimer" element={<Disclaimer />} />
+            <Route path="/corporate-info" element={<CorporateInfo />} />
+          </Routes>
+        </Suspense>
       </main>
-      <NewsletterAnnouncement />
+      <Suspense fallback={null}>
+        <NewsletterAnnouncement />
+      </Suspense>
       <Footer />
     </>
   );
 }
 
 export default function App() {
-  const [loaded, setLoaded] = useState(() => {
-    return sessionStorage.getItem('app_initialized') === 'true';
-  });
   const [theme, setTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'dark';
     const stored = localStorage.getItem('theme');
     if (stored) return stored;
     return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   });
-
-  const handleLoaderComplete = () => {
-    setLoaded(true);
-    sessionStorage.setItem('app_initialized', 'true');
-  };
 
   const toggleTheme = () => {
     setTheme(prev => {
@@ -119,7 +118,6 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      {!loaded && <Loader onComplete={handleLoaderComplete} />}
       <AppContent theme={theme} toggleTheme={toggleTheme} />
     </BrowserRouter>
   );

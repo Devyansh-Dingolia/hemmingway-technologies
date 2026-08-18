@@ -4,7 +4,6 @@ import {
   Hash,
   MapPin,
   FileText,
-  ShieldCheck,
   Users,
   Globe,
   Scale,

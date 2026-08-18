@@ -3,22 +3,22 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 
 const PHOTOS = [
   {
-    src: '/SIH photos/taking trophy.jfif',
+    src: '/SIH photos/taking trophy.webp',
     caption: 'Receiving the winning trophy — ₹1,50,000 prize',
     label: 'Award Ceremony',
   },
   {
-    src: '/SIH photos/explaing to judges.jfif',
+    src: '/SIH photos/explaing to judges.webp',
     caption: 'Presenting our Ministry of Coal app prototype to the judges',
     label: 'Project Presentation',
   },
   {
-    src: '/SIH photos/team photos.jfif',
+    src: '/SIH photos/team photos.webp',
     caption: 'Team Vajra Dev at Smart India Hackathon 2025',
     label: 'Grand Finale — SIH 2025',
   },
   {
-    src: '/SIH photos/team photo 2.jfif',
+    src: '/SIH photos/team photo 2.webp',
     caption: 'Team Vajra Dev during development phase of SIH 2025',
     label: 'Development Phase',
   },
@@ -77,6 +77,8 @@ export default function SIHGallery() {
             <img
               src={PHOTOS[current].src}
               alt={PHOTOS[current].caption}
+              width={800}
+              height={500}
               loading="lazy"
               decoding="async"
               onClick={() => setLightbox(true)}
@@ -107,7 +109,7 @@ export default function SIHGallery() {
               onClick={() => goTo(i, i > current ? 'next' : 'prev')}
               aria-label={`Photo ${i + 1}`}
             >
-              <img src={p.src} alt={p.caption} loading="lazy" decoding="async" />
+              <img src={p.src} alt={p.caption} width={120} height={80} loading="lazy" decoding="async" />
             </button>
           ))}
         </div>

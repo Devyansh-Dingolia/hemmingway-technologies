@@ -1,53 +1,68 @@
 import { useEffect, useRef } from 'react';
 
-// Encrypted text effect — inspired by the component in /componets/encripted text.jsx
-export default function EncryptedText({ text, className = '', speed = 40 }) {
+export default function EncryptedText({ text, className = '', speed = 30 }) {
   const ref = useRef(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
+    // Check reduced motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = text;
+      return;
+    }
+
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
     let iteration = 0;
-    let interval;
+    let rafId;
+    let lastTime = 0;
+    const len = text.length;
 
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
-        interval = setInterval(() => {
-          // Create fresh pool for unrevealed characters only
-          const unrevealedIndices = [];
-          text.split('').forEach((char, idx) => {
-            if (char !== ' ' && idx >= iteration) {
-              unrevealedIndices.push(idx);
-            }
-          });
-
-          const encryptedText = text
-            .toLowerCase()
-            .split('')
-            .map((char, idx) => {
-              if (char === ' ') return ' ';
-              if (idx < iteration) return text[idx];
-              // Pick random unrevealed character
-              if (unrevealedIndices.length > 0) {
-                const randomPos = Math.floor(Math.random() * unrevealedIndices.length);
-                return text[unrevealedIndices[randomPos]];
-              }
-              return char;
-            })
-            .join('');
-            
-          el.textContent = encryptedText;
-          
-          if (iteration >= text.length) clearInterval(interval);
-          iteration += 0.5;
-        }, speed);
         observer.disconnect();
+
+        const step = (timestamp) => {
+          if (!lastTime) lastTime = timestamp;
+          const elapsed = timestamp - lastTime;
+
+          if (elapsed >= speed) {
+            lastTime = timestamp;
+            let result = '';
+            const currentIter = Math.floor(iteration);
+
+            for (let i = 0; i < len; i++) {
+              const char = text[i];
+              if (char === ' ') {
+                result += ' ';
+              } else if (i < currentIter) {
+                result += char;
+              } else {
+                result += chars[Math.floor(Math.random() * chars.length)];
+              }
+            }
+
+            el.textContent = result;
+            iteration += 1.5;
+          }
+
+          if (iteration < len) {
+            rafId = requestAnimationFrame(step);
+          } else {
+            el.textContent = text;
+          }
+        };
+
+        rafId = requestAnimationFrame(step);
       }
-    }, { threshold: 0.5 });
+    }, { threshold: 0.2 });
 
     observer.observe(el);
-    return () => { clearInterval(interval); observer.disconnect(); };
+    return () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      observer.disconnect();
+    };
   }, [text, speed]);
 
   return <span ref={ref} className={className} style={{ display: 'inline-block', fontFamily: 'var(--mono)', letterSpacing: '0' }}>{text}</span>;
